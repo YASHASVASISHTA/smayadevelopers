@@ -464,13 +464,13 @@
             object-fit: cover;
         }
 
-        /* TESTIMONIALS */
+        /* TESTIMONIALS CAROUSEL */
         .testimonials-section { background: var(--white); }
 
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+        .testimonials-carousel {
+            position: relative;
+            margin-top: 56px;
+            min-height: 280px;
         }
 
         .testimonial-card {
@@ -478,7 +478,20 @@
             border-radius: 16px;
             padding: 32px;
             border: 1px solid rgba(227, 221, 211, 0.6);
-            transition: all 0.4s;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .testimonial-card.active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
         }
 
         .testimonial-card:hover {
@@ -531,22 +544,57 @@
             margin: 0;
         }
 
-        /* BLOG SECTION */
+        .carousel-indicator {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator-dot.active {
+            background: var(--gold);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* BLOG SECTION CAROUSEL */
         .blog-section { background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%); }
 
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+        .blog-carousel {
+            position: relative;
+            margin-top: 56px;
+            min-height: 380px;
         }
 
         .blog-card {
             background: var(--white);
             border-radius: 16px;
             overflow: hidden;
-            transition: all 0.4s;
+            transition: opacity 0.5s ease-in-out;
             cursor: pointer;
             border: 1px solid rgba(227, 221, 211, 0.6);
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .blog-card.active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
         }
 
         .blog-card:hover {
@@ -751,7 +799,7 @@
         }
 
         .footer-bottom {
-            display: flex;
+           display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 32px 0;
@@ -768,38 +816,39 @@
 
         .footer-bottom a:hover { color: var(--gold); }
 
-        /* VIBRANT WHATSAPP BUTTON WITH PULSE EFFECT */
-.whatsapp-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 65px; /* Slightly larger */
-    height: 65px;
-    background: #25d366;
-    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 32px;
-    text-decoration: none;
-    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1000;
-    animation: whatsapp-pulse 2s infinite; /* Continuous pulse */
-}
+        /* VIBRANT WHATSAPP BUTTON */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 65px;
+            height: 65px;
+            background: #25d366;
+            background: linear-gradient(135deg, #25d366 0%, #1da853 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            animation: whatsapp-pulse 2s infinite;
+        }
 
-.whatsapp-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
-}
+        .whatsapp-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.8);
+        }
 
-@keyframes whatsapp-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
+        @keyframes whatsapp-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.9); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
         /* MODAL STYLES */
         .modal {
             display: none;
@@ -865,8 +914,6 @@
             .nav-cta { display: none; }
 
             .services-grid,
-            .testimonials-grid,
-            .blog-grid,
             .footer-grid { grid-template-columns: 1fr; }
 
             .about-content,
@@ -904,12 +951,12 @@
             </a>
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
-                <a href="#about">About</a>
-                <a href="#why-us">Why Choose Us</a>
                 <a href="#projects">Projects</a>
                 <a href="#services">Services</a>
+                <a href="#about">About Us</a>
+                <a href="#why-us">Why Choose Us</a>
                 <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
+                <a href="#contact">Contact Us</a>
             </div>
             <button class="btn btn-primary nav-cta" onclick="openContactModal()">Get In Touch</button>
             <button class="hamburger" onclick="toggleMobileMenu()">
@@ -923,12 +970,12 @@
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
         <a href="#home" onclick="toggleMobileMenu()">Home</a>
-        <a href="#about" onclick="toggleMobileMenu()">About</a>
-        <a href="#why-us" onclick="toggleMobileMenu()">Why Choose Us</a>
         <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
         <a href="#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="#about" onclick="toggleMobileMenu()">About Us</a>
+        <a href="#why-us" onclick="toggleMobileMenu()">Why Choose Us</a>
         <a href="#blog" onclick="toggleMobileMenu()">Blog</a>
-        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact Us</a>
     </div>
 
     <!-- HERO SECTION -->
@@ -968,193 +1015,7 @@
         </div>
     </section>
 
-    <!-- SERVICES SECTION -->
-    <section class="services-section section" id="services">
-        <div class="container">
-            <div class="text-center">
-                <p class="section-label">What We Offer</p>
-                <h2 class="section-title">Our Services</h2>
-                <p class="section-subtitle">If you are looking to invest in sites in Mysore, we offer a multitude of services for the same at GSS Projects</p>
-            </div>
-            <div class="services-grid" style="margin-top: 56px;">
-                <div class="service-card">
-                    <div class="service-icon">🏘️</div>
-                    <h3>Land Procurement</h3>
-                    <p>GSS Projects is connected with many small and big real estate agents. We liaison with top officials in government departments to facilitate the processes.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3>Marketing</h3>
-                    <p>GSS Projects markets sites and plots in Mysore with an in-house marketing team of executives and extensive database of prospective buyers.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📐</div>
-                    <h3>Layout Development</h3>
-                    <p>GSS Projects has expertise in outright purchase of land and mediation to facilitate purchase from owner to buyer for layout development.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏗️</div>
-                    <h3>Turnkey Projects</h3>
-                    <p>GSS Projects can facilitate project development and marketing for other parties. Contact us if you have properties to develop.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🤝</div>
-                    <h3>Joint Development</h3>
-                    <p>GSS Projects is ready to develop land for layouts with owners and other builders. Your search for a joint venture ends here.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📋</div>
-                    <h3>Department Clearance</h3>
-                    <p>GSS Projects ensures clear title for the plot apart from trading encumbrances. We get the paperwork done professionally.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT US SECTION -->
-    <section class="about-section section" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="section-label">Our Story</p>
-                    <h3>About Smaya Developers</h3>
-                    <p>Founded with a vision to provide premium residential properties in Mysore, Smaya Developers has been a trusted name in real estate for over a decade. We believe in transparency, quality, and customer satisfaction.</p>
-                    <p><strong>Vision:</strong> To become the leading real estate company offering premium plots in Mysore with world-class amenities and excellent customer service.</p>
-                    <p><strong>Mission:</strong> To deliver high-quality properties through transparent processes, ensuring customer trust and satisfaction in every transaction.</p>
-                    <p style="margin-top: 24px;"><strong>Key Milestones:</strong></p>
-                    <ul style="margin-left: 20px; margin-top: 12px;">
-                        <li>✓ 500+ Happy Customers</li>
-                        <li>✓ 50+ Completed Projects</li>
-                        <li>✓ RERA Approved</li>
-                        <li>✓ 10+ Years of Excellence</li>
-                    </ul>
-                </div>
-                <div class="about-image">
-                    <img src="LOGO FINAL PNG.png" alt="About Smaya Developers">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE US -->
-    <section class="section" style="background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);" id="why-us">
-        <div class="container">
-            <div class="text-center">
-                <p class="section-label">Advantages</p>
-                <h2 class="section-title">Why Choose Smaya Developers</h2>
-            </div>
-            <div class="services-grid" style="margin-top: 56px;">
-                <div class="service-card">
-                    <div class="service-icon">✅</div>
-                    <h3>RERA Approved</h3>
-                    <p>All our properties are RERA registered, ensuring legal protection and transparency in every transaction.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📜</div>
-                    <h3>A-Khata Properties</h3>
-                    <p>We deal exclusively with A-Khata properties, guaranteeing authenticity and legal compliance of land titles.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🏆</div>
-                    <h3>Premium Locations</h3>
-                    <p>Our plots are strategically located in prime areas of Mysore with excellent connectivity and amenities.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="testimonials-section section">
-        <div class="container">
-            <div class="text-center">
-                <p class="section-label">Customer Reviews</p>
-                <h2 class="section-title">What Our Customers Say</h2>
-            </div>
-            <div class="testimonials-grid" style="margin-top: 56px;">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Excellent service and professional approach. Smaya Developers made the entire process smooth and transparent. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RK</div>
-                        <div class="author-info">
-                            <h4>Rajesh Kumar</h4>
-                            <p>Plot Owner</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Best investment decision I made. The property value has appreciated significantly. Thank you Smaya for the guidance!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">PS</div>
-                        <div class="author-info">
-                            <h4>Priya Singh</h4>
-                            <p>Investor</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Very professional team. They understand customer needs and provide suitable options. Five stars for customer care!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">VM</div>
-                        <div class="author-info">
-                            <h4>Vikram Malhotra</h4>
-                            <p>Property Developer</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BLOG SECTION -->
-    <section class="blog-section section" id="blog">
-        <div class="container">
-            <div class="text-center">
-                <p class="section-label">Latest Updates</p>
-                <h2 class="section-title">Our Blog & News</h2>
-                <p class="section-subtitle">Stay updated with the latest news, tips, and insights about real estate investment in Mysore</p>
-            </div>
-            <div class="blog-grid" style="margin-top: 56px;">
-                <div class="blog-card" onclick="window.location.href='blog.html'">
-                    <div class="blog-image">
-                        <img src="img5.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date">Mar 04, 2026</div>
-                        <h3>Real Estate Investment Tips for 2026</h3>
-                        <p>Learn how to make smart real estate investments in Mysore and get better returns on your capital.</p>
-                        <a href="blog.html" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card" onclick="window.location.href='blog.html'">
-                    <div class="blog-image">
-                        <img src="img6.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date">Feb 28, 2026</div>
-                        <h3>Why Mysore is the Best Investment Hub</h3>
-                        <p>Discover why Mysore is becoming India's most sought-after real estate destination for investors.</p>
-                        <a href="blog.html" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card" onclick="window.location.href='blog.html'">
-                    <div class="blog-image">
-                        <img src="img7.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date">Feb 20, 2026</div>
-                        <h3>RERA Registration: Everything You Need to Know</h3>
-                        <p>Complete guide to understanding RERA registration and how it protects property buyers.</p>
-                        <a href="blog.html" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS SECTION (CAROUSEL) -->
+    <!-- PROJECTS SECTION -->
     <section class="section" style="background: var(--white);" id="projects">
         <div class="container">
             <div class="text-center">
@@ -1219,9 +1080,6 @@
                             <a href="project.html" class="read-more">View Details →</a>
                         </div>
                     </div>
-
-                    <!-- Project 4 -->
-                  
                 </div>
 
                 <!-- Carousel Controls -->
@@ -1338,6 +1196,202 @@
             .carousel-prev, .carousel-next { display: none; }
         }
     </style>
+
+    <!-- SERVICES SECTION -->
+    <section class="services-section section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">What We Offer</p>
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">If you are looking to invest in sites in Mysore, we offer a multitude of services for the same at GSS Projects</p>
+            </div>
+            <div class="services-grid" style="margin-top: 56px;">
+                <div class="service-card">
+                    <div class="service-icon">🏘️</div>
+                    <h3>Land Procurement</h3>
+                    <p>GSS Projects is connected with many small and big real estate agents. We liaison with top officials in government departments to facilitate the processes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Marketing</h3>
+                    <p>GSS Projects markets sites and plots in Mysore with an in-house marketing team of executives and extensive database of prospective buyers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>Layout Development</h3>
+                    <p>GSS Projects has expertise in outright purchase of land and mediation to facilitate purchase from owner to buyer for layout development.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Turnkey Projects</h3>
+                    <p>GSS Projects can facilitate project development and marketing for other parties. Contact us if you have properties to develop.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Joint Development</h3>
+                    <p>GSS Projects is ready to develop land for layouts with owners and other builders. Your search for a joint venture ends here.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Department Clearance</h3>
+                    <p>GSS Projects ensures clear title for the plot apart from trading encumbrances. We get the paperwork done professionally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section class="about-section section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="section-label">Our Story</p>
+                    <h3>About Smaya Developers</h3>
+                    <p>Founded with a vision to provide premium residential properties in Mysore, Smaya Developers has been a trusted name in real estate for over a decade. We believe in transparency, quality, and customer satisfaction.</p>
+                    <p><strong>Vision:</strong> To become the leading real estate company offering premium plots in Mysore with world-class amenities and excellent customer service.</p>
+                    <p><strong>Mission:</strong> To deliver high-quality properties through transparent processes, ensuring customer trust and satisfaction in every transaction.</p>
+                    <p style="margin-top: 24px;"><strong>Key Milestones:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 12px;">
+                        <li>✓ 500+ Happy Customers</li>
+                        <li>✓ 50+ Completed Projects</li>
+                        <li>✓ RERA Approved</li>
+                        <li>✓ 10+ Years of Excellence</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="LOGO FINAL PNG.png" alt="About Smaya Developers">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section" style="background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);" id="why-us">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Advantages</p>
+                <h2 class="section-title">Why Choose Smaya Developers</h2>
+            </div>
+            <div class="services-grid" style="margin-top: 56px;">
+                <div class="service-card">
+                    <div class="service-icon">✅</div>
+                    <h3>RERA Approved</h3>
+                    <p>All our properties are RERA registered, ensuring legal protection and transparency in every transaction.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📜</div>
+                    <h3>A-Khata Properties</h3>
+                    <p>We deal exclusively with A-Khata properties, guaranteeing authenticity and legal compliance of land titles.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3>Premium Locations</h3>
+                    <p>Our plots are strategically located in prime areas of Mysore with excellent connectivity and amenities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS CAROUSEL -->
+    <section class="testimonials-section section">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Customer Reviews</p>
+                <h2 class="section-title">What Our Customers Say</h2>
+            </div>
+            <div class="testimonials-carousel">
+                <div class="testimonial-card active">
+                    <div class="stars">★★★★★</div>
+                    <p>"Excellent service and professional approach. Smaya Developers made the entire process smooth and transparent. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Plot Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Best investment decision I made. The property value has appreciated significantly. Thank you Smaya for the guidance!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <h4>Priya Singh</h4>
+                            <p>Investor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Very professional team. They understand customer needs and provide suitable options. Five stars for customer care!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">VM</div>
+                        <div class="author-info">
+                            <h4>Vikram Malhotra</h4>
+                            <p>Property Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicator">
+                <div class="indicator-dot active" onclick="showTestimonial(0)"></div>
+                <div class="indicator-dot" onclick="showTestimonial(1)"></div>
+                <div class="indicator-dot" onclick="showTestimonial(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION CAROUSEL -->
+    <section class="blog-section section" id="blog">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Latest Updates</p>
+                <h2 class="section-title">Our Blog & News</h2>
+                <p class="section-subtitle">Stay updated with the latest news, tips, and insights about real estate investment in Mysore</p>
+            </div>
+            <div class="blog-carousel">
+                <div class="blog-card active" onclick="window.location.href='blog.html'">
+                    <div class="blog-image">
+                        <img src="img5.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Mar 04, 2026</div>
+                        <h3>Real Estate Investment Tips for 2026</h3>
+                        <p>Learn how to make smart real estate investments in Mysore and get better returns on your capital.</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card" onclick="window.location.href='blog.html'">
+                    <div class="blog-image">
+                        <img src="img6.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Feb 28, 2026</div>
+                        <h3>Why Mysore is the Best Investment Hub</h3>
+                        <p>Discover why Mysore is becoming India's most sought-after real estate destination for investors.</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card" onclick="window.location.href='blog.html'">
+                    <div class="blog-image">
+                        <img src="img7.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Feb 20, 2026</div>
+                        <h3>RERA Registration: Everything You Need to Know</h3>
+                        <p>Complete guide to understanding RERA registration and how it protects property buyers.</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicator">
+                <div class="indicator-dot active" onclick="showBlog(0)"></div>
+                <div class="indicator-dot" onclick="showBlog(1)"></div>
+                <div class="indicator-dot" onclick="showBlog(2)"></div>
+            </div>
+        </div>
+    </section>
 
     <!-- CONTACT SECTION -->
     <section class="contact-section section" id="contact">
@@ -1515,6 +1569,48 @@
 
         // Auto-rotate carousel every 5 seconds
         setInterval(nextSlide, 5000);
+
+        // TESTIMONIALS CAROUSEL
+        let currentTestimonial = 0;
+        const testimonialCards = document.querySelectorAll('.testimonials-carousel .testimonial-card');
+        const testimonyIndicators = document.querySelectorAll('.testimonials-carousel + .carousel-indicator .indicator-dot');
+
+        function showTestimonial(n) {
+            testimonialCards.forEach(card => card.classList.remove('active'));
+            testimonyIndicators.forEach(dot => dot.classList.remove('active'));
+            
+            testimonialCards[n].classList.add('active');
+            testimonyIndicators[n].classList.add('active');
+            currentTestimonial = n;
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            showTestimonial(currentTestimonial);
+        }
+
+        setInterval(nextTestimonial, 4000);
+
+        // BLOG CAROUSEL
+        let currentBlog = 0;
+        const blogCards = document.querySelectorAll('.blog-carousel .blog-card');
+        const blogIndicators = document.querySelectorAll('.blog-carousel + .carousel-indicator .indicator-dot');
+
+        function showBlog(n) {
+            blogCards.forEach(card => card.classList.remove('active'));
+            blogIndicators.forEach(dot => dot.classList.remove('active'));
+            
+            blogCards[n].classList.add('active');
+            blogIndicators[n].classList.add('active');
+            currentBlog = n;
+        }
+
+        function nextBlog() {
+            currentBlog = (currentBlog + 1) % blogCards.length;
+            showBlog(currentBlog);
+        }
+
+        setInterval(nextBlog, 4000);
 
         // PROJECTS CAROUSEL SCROLL
         function scrollProjects(direction) {
