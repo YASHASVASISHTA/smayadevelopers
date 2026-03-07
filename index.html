@@ -14,21 +14,26 @@
         }
 
         :root {
-            --brown: #3d2b1f;
-            --brown-dark: #2a1c13;
-            --brown-medium: #6b5a4e;
-            --brown-light: #8b7966;
-            --gold: #c5a059;
-            --gold-light: #d4b87a;
-            --gold-pale: #e8d5a8;
-            --cream: #f5f2ed;
+            /* Dark Blue Background - Matches Logo */
+            --brown: #1A2C3E;
+            --brown-dark: #0F1D2E;
+            --brown-medium: #2c4258;
+            --brown-light: #445e77;
+
+            /* Shining Gold - Matches SMAYA Logo */
+            --gold: #FFD700;       /* Bright shining gold */
+            --gold-light: #FFF44F; /* Ultra bright sunshine gold */
+            --gold-pale: #FFE082;  /* Soft gold for accents */
+            --cream: #F5F3F0;      /* Clean off-white */
+            
+            /* Additional Colors */
             --cream-dark: #e3ddd3;
             --available: #22c55e;
             --sold: #ef4444;
             --reserved: #c5a059;
             --white: #ffffff;
-            --shadow: 0 4px 32px rgba(61, 43, 31, 0.08);
-            --shadow-lg: 0 16px 48px rgba(61, 43, 31, 0.12);
+            --shadow: 0 4px 32px rgba(26, 44, 62, 0.1);
+            --shadow-lg: 0 16px 48px rgba(26, 44, 62, 0.15);
         }
 
         html { scroll-behavior: smooth; }
@@ -60,12 +65,12 @@
             align-items: center;
             gap: 8px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            background: rgba(197, 160, 89, 0.08);
-            border: 1px solid rgba(197, 160, 89, 0.2);
+            background: rgba(255, 215, 0, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             padding: 8px 22px;
             border-radius: 50px;
             margin-bottom: 20px;
@@ -98,11 +103,14 @@
         .btn-primary {
             background: var(--gold);
             color: var(--brown-dark);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
         }
         .btn-primary:hover {
             background: var(--gold-light);
             transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba(197, 160, 89, 0.35);
+            box-shadow: 0 12px 32px rgba(255, 215, 0, 0.5);
         }
         .btn-outline {
             background: transparent;
@@ -150,20 +158,20 @@
             position: sticky;
             top: 50px;
             z-index: 999;
-            background: rgba(255, 255, 255, 0.88);
+            background: var(--brown);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(227, 221, 211, 0.5);
+            border-bottom: 2px solid var(--gold);
             transition: box-shadow 0.3s;
         }
 
-        .navbar.scrolled { box-shadow: 0 4px 24px rgba(61, 43, 31, 0.06); }
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(26, 44, 62, 0.2); }
 
         .nav-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 80px;
             max-width: 1180px;
             margin: 0 auto;
             padding: 0 24px;
@@ -173,14 +181,17 @@
             font-family: 'Playfair Display', serif;
             font-size: 24px;
             font-weight: 700;
-            color: var(--brown);
+            color: var(--gold);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            transition: transform 0.3s ease;
         }
 
-        .logo img { width: 70px; height: y70px; }
-        .logo span { color: var(--gold); }
+        .logo:hover { transform: scale(1.05); }
+
+        .logo img { width: 80px; height: auto; display: block; filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.3)); }
+        .logo span { color: var(--gold); font-size: 20px; }
 
         .nav-links {
             display: flex;
@@ -191,14 +202,14 @@
         .nav-links a {
             font-size: 13px;
             font-weight: 500;
-            color: var(--brown-medium);
+            color: rgba(255, 255, 255, 0.7);
             position: relative;
             padding: 4px 0;
             transition: color 0.3s;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--brown);
+            color: var(--gold);
         }
 
         .nav-links a::after {
@@ -277,7 +288,7 @@
 
         /* HERO */
         .hero {
-            background: linear-gradient(160deg, #1a110b 0%, var(--brown-dark) 30%, var(--brown) 65%, #5a4234 100%);
+            background: linear-gradient(135deg, #0F1D2E 0%, var(--brown-dark) 40%, var(--brown) 70%, #1A2C3E 100%);
             color: var(--cream);
             padding: 100px 0 88px;
             position: relative;
@@ -286,6 +297,18 @@
             display: flex;
             align-items: center;
             margin-top: 50px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -946,8 +969,8 @@
     <nav class="navbar">
         <div class="nav-inner">
             <a href="#home" class="logo">
-                <img src="LOGO.PNG" alt="Smaya Developers">
-                <span></span>
+                <img src="logo.png" alt="Smaya Developers Logo">
+                <span>SMAYA</span>
             </a>
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
@@ -1690,4 +1713,3 @@
     </script>
 </body>
 </html>
-
