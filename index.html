@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smaya Developers | Premium Plots in Mysore</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+
+        /* REAL INSTAGRAM GRADIENT LOGO */
+/* REAL INSTAGRAM BRANDING */
+.insta-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-top: 16px;
+    transition: transform 0.3s ease;
+}
+
+.insta-wrapper:hover {
+    transform: translateX(5px);
+}
+
+.insta-real {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 28px; /* Slightly larger logo */
+}
+
+.insta-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold); /* Matches your SMAYA gold */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
         /* RESET & VARIABLES */
         *,*::before,*::after {
             box-sizing: border-box;
@@ -28,7 +59,7 @@
             
             /* Additional Colors */
             --cream-dark: #e3ddd3;
-            --available: #22c55e;
+            --available: #25D366 ;
             --sold: #ef4444;
             --reserved: #c5a059;
             --white: #ffffff;
@@ -156,7 +187,7 @@
         /* NAVBAR */
         .navbar {
             position: sticky;
-            top: 50px;
+            top: 31px;
             z-index: 999;
             background: var(--brown);
             backdrop-filter: blur(20px);
@@ -190,7 +221,7 @@
 
         .logo:hover { transform: scale(1.05); }
 
-        .logo img { width: 80px; height: auto; display: block; }
+        .logo img { width: 80px; height: auto; display: block;  }
         .logo span { color: var(--gold); font-size: 20px; }
 
         .nav-links {
@@ -246,7 +277,7 @@
             display: block;
             width: 22px;
             height: 2px;
-            background: var(--brown);
+            background: var(--gold);
             border-radius: 2px;
             transition: all 0.3s;
         }
@@ -258,7 +289,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(42, 28, 19, 0.97);
+            background: #2c4258;
             z-index: 2000;
             flex-direction: column;
             align-items: center;
@@ -290,13 +321,14 @@
         .hero {
             background: linear-gradient(135deg, #0F1D2E 0%, var(--brown-dark) 40%, var(--brown) 70%, #1A2C3E 100%);
             color: var(--cream);
+            
             padding: 100px 0 88px;
             position: relative;
             overflow: hidden;
             min-height: 88vh;
             display: flex;
             align-items: center;
-            margin-top: 50px;
+            margin-top: 31px;
         }
         
         .hero::before {
@@ -356,15 +388,24 @@
             margin-bottom: 56px;
         }
 
-        /* BANNER CAROUSEL */
-        .banner-carousel {
-            position: relative;
-            height: 300px;
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--cream-dark);
-            margin-bottom: 40px;
-        }
+       /* BANNER CAROUSEL - FIT FULL IMAGE */
+.banner-carousel {
+    position: relative;
+    height: auto; /* Changed from 300px to auto to allow the image to set the height */
+    min-height: 350px; 
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cream-dark);
+    margin-bottom: 40px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto; /* Ensures the image maintains its aspect ratio */
+    max-height: 500px; /* Optional: prevents images from becoming too tall on desktop */
+    object-fit: contain; /* Changed from cover to contain to show the full image */
+    display: block;
+}
 
         .carousel-item {
             position: absolute;
@@ -947,6 +988,84 @@
             .fixed-top-bar { flex-direction: row; gap: 4px; }
             .top-left, .top-right { width: auto; justify-content: flex-start; }
         }
+
+
+ /* UPDATED WELCOME TEXT STYLES */
+.welcome-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 32px); /* Increased font size */
+    color: var(--gold);
+    margin-bottom: 20px; /* Provides spacing from the badge below */
+    display: block;
+    font-weight: 700;
+    opacity: 0;
+    position: relative;
+    top: -20px; /* Moves it up closer to the navbar */
+}
+
+/* ADJUSTED ANIMATIONS */
+@keyframes slideInLeft {
+    from { 
+        transform: translateX(-100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes slideInRight {
+    from { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+/* Hide Get In Touch button on mobile devices */
+@media (max-width: 768px) {
+    .nav-inner .nav-cta {
+        display: none !important;
+    }
+}
+
+.animate-left {
+    animation: slideInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-right {
+    animation: slideInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Ensure the hero content doesn't have too much top padding */
+.hero-content {
+    padding-top: 10px; /* Reduced padding to move everything up */
+}
+
+/* GLOBAL IMAGE FIX */
+/* GLOBAL IMAGE FIX */
+img {
+    max-width: 100%; 
+    height: auto !important; 
+    display: block; 
+    object-fit: contain; /* This ensures no image in the site gets zoomed/cropped */
+}
+/* CONTAINER RESET */
+/* This targets the height of boxes you previously set to 300px or 350px */
+.banner-carousel, 
+.project-item div, 
+.blog-image {
+  /* Allows containers to grow/shrink with the image */
+    min-height: 200px; /* Prevents the box from collapsing if image loads slow */
+    max-height: 500px; /* Prevents images from becoming too tall on desktop */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* Or var(--cream-dark) if you want a placeholder color */
+}
     </style>
 </head>
 <body>
@@ -969,16 +1088,16 @@
     <nav class="navbar">
         <div class="nav-inner">
             <a href="#home" class="logo">
-                <img src="LOGO.PNG" alt="Smaya Developers Logo">
-                <span>SMAYA</span>
+                <img src="logo.png" alt="Smaya Developers Logo">
+                
             </a>
             <div class="nav-links">
-                <a href="#home" class="active">Home</a>
+                <a href="#home" class="acti ve">Home</a>
                 <a href="#projects">Projects</a>
                 <a href="#services">Services</a>
                 <a href="#about">About Us</a>
                 <a href="#why-us">Why Choose Us</a>
-                <a href="#blog">Blog</a>
+             
                 <a href="#contact">Contact Us</a>
             </div>
             <button class="btn btn-primary nav-cta" onclick="openContactModal()">Get In Touch</button>
@@ -994,40 +1113,44 @@
         <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
         <a href="#home" onclick="toggleMobileMenu()">Home</a>
         <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
-        <a href="#services" onclick="toggleMobileMenu()">Services</a>
         <a href="#about" onclick="toggleMobileMenu()">About Us</a>
+        
+        <a href="#services" onclick="toggleMobileMenu()">Services</a>
         <a href="#why-us" onclick="toggleMobileMenu()">Why Choose Us</a>
-        <a href="#blog" onclick="toggleMobileMenu()">Blog</a>
+
         <a href="#contact" onclick="toggleMobileMenu()">Contact Us</a>
     </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <span class="welcome-text animate-left">Welcome to Smaya Developers</span>
+            
+            <div class="hero-content-main animate-right">
                 <div class="hero-badge">✨ Premium Properties in Mysore</div>
                 <h1>Premium <em>Plots for Sale</em> in Mysore</h1>
                 <p>Discover the finest residential plots in 3rd Stage Vijayanagar with world-class amenities, RERA approval, and A-Khata properties. Your dream home awaits!</p>
-               <div class="hero-buttons">
-    <button class="btn btn-primary" onclick="openContactModal()">Book Plot Online</button>
-    <button class="btn btn-outline" onclick="openContactModal()">Contact Us</button>
-</div>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="openContactModal()">Book Plot Online</button>
+                    <button class="btn btn-outline" onclick="openContactModal()">Contact Us</button>
+                </div>
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- BANNER CAROUSEL -->
-    <section style="padding: 60px 0; background: var(--cream);">
+    
+ <!-- <section style="padding: 60px 0; background: var(--cream);">
         <div class="container">
             <div class="banner-carousel">
                 <div class="carousel-item active">
-                    <img src="L.png" alt="Premium Plot">
+                    <img src="12.jpeg" alt="Premium Plot">
                 </div>
                 <div class="carousel-item">
-                    <img src="img2.png" alt="Project Overview">
+                    <img src="123.jpeg" alt="Project Overview">
                 </div>
                 <div class="carousel-item">
-                    <img src="img3.png" alt="Amenities">
+                    <img src="12.jpeg" alt="Amenities">
                 </div>
                 <div class="carousel-dots">
                     <div class="dot active" onclick="goToSlide(0)"></div>
@@ -1036,228 +1159,291 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- PROJECTS SECTION -->
+    </section>    -- !>
+   <-- PROJECTS SECTION -->
     <section class="section" style="background: var(--white);" id="projects">
-        <div class="container">
-            <div class="text-center">
-                <p class="section-label">Our Portfolio</p>
-                <h2 class="section-title">Our Projects</h2>
-                <p class="section-subtitle">Explore our completed and ongoing projects in Mysore</p>
-            </div>
-            
-            <!-- Projects Carousel -->
-            <div style="margin-top: 56px; position: relative;">
-                <div class="projects-carousel" id="projectsCarousel">
-                    <!-- Project 1 -->
-                    <div class="project-item">
-                        <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; margin-bottom: 20px; height: 300px;">
-                            <img src="img1.png" alt="Vijayanagar Heights" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="padding: 0 16px;">
-                            <span class="project-status ongoing">Ongoing</span>
-                            <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--brown);">Vijayanagar Heights</h3>
-                            <p style="color: var(--brown-medium); font-size: 13.5px; margin-bottom: 12px;">Premium residential plots with modern amenities in 3rd Stage Vijayanagar</p>
-                            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--gold); margin-bottom: 12px;">
-                                <span>📍 Mysore</span>
-                                <span>2500+ sqft</span>
-                            </div>
-                            <p style="color: var(--gold); font-weight: 600; margin-bottom: 14px;">₹45,00,000 - ₹65,00,000</p>
-                            <a href="project.html" class="read-more">View Details →</a>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-item">
-                        <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; margin-bottom: 20px; height: 300px;">
-                            <img src="img8.png" alt="Green Valley Estate" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="padding: 0 16px;">
-                            <span class="project-status completed">Completed</span>
-                            <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--brown);">Green Valley Estate</h3>
-                            <p style="color: var(--brown-medium); font-size: 13.5px; margin-bottom: 12px;">Luxury plots with eco-friendly features and premium infrastructure</p>
-                            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--gold); margin-bottom: 12px;">
-                                <span>📍 Mysore</span>
-                                <span>3000+ sqft</span>
-                            </div>
-                            <p style="color: var(--gold); font-weight: 600; margin-bottom: 14px;">₹52,00,000 - ₹75,00,000</p>
-                            <a href="project.html" class="read-more">View Details →</a>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-item">
-                        <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; margin-bottom: 20px; height: 300px;">
-                            <img src="img9.png" alt="Platinum Plaza" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="padding: 0 16px;">
-                            <span class="project-status ongoing">Ongoing</span>
-                            <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--brown);">Platinum Plaza</h3>
-                            <p style="color: var(--brown-medium); font-size: 13.5px; margin-bottom: 12px;">Commercial-residential hybrid plots with excellent connectivity</p>
-                            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--gold); margin-bottom: 12px;">
-                                <span>📍 Mysore</span>
-                                <span>2800+ sqft</span>
-                            </div>
-                            <p style="color: var(--gold); font-weight: 600; margin-bottom: 14px;">₹40,00,000 - ₹58,00,000</p>
-                            <a href="project.html" class="read-more">View Details →</a>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="text-center">
+            <p class="section-label">Our Portfolio</p>
+            <h2 class="section-title">Our Projects</h2>
+            <p class="section-subtitle">Explore our completed and ongoing projects in Mysore</p>
+        </div>
+        
+        <div class="projects-container">
+            <div class="project-item active">
+                <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; height: 350px;">
+                    <img src="img1.png" alt="Vijayanagar Heights" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-
-                <!-- Carousel Controls -->
-                <button class="carousel-prev" onclick="scrollProjects('prev')">❮</button>
-                <button class="carousel-next" onclick="scrollProjects('next')">❯</button>
+                <div class="text-center" style="padding: 24px;">
+                    <span class="project-status ongoing">Ongoing</span>
+                    <h3 style="font-size: 24px; margin: 15px 0;">Vijayanagar Heights</h3>
+                    <p style="color: var(--brown-medium);">Premium plots in 3rd Stage Vijayanagar</p>
+                </div>
             </div>
 
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="project.html" class="btn btn-primary">See All Projects</a>
+            <div class="project-item">
+                <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; height: 350px;">
+                    <img src="img1.jpeg" alt="Green Valley" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="text-center" style="padding: 24px;">
+                    <span class="project-status completed">Completed</span>
+                    <h3 style="font-size: 24px; margin: 15px 0;">Green Valley Estate</h3>
+                    <p style="color: var(--brown-medium);">Luxury eco-friendly plots</p>
+                </div>
+            </div>
+            <div class="project-item">
+                <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; height: 350px;">
+                    <img src="12.jpeg" alt="Green Valley" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="text-center" style="padding: 24px;">
+                    <span class="project-status completed">Completed</span>
+                    <h3 style="font-size: 24px; margin: 15px 0;">Green Valley Estate</h3>
+                    <p style="color: var(--brown-medium);">Luxury eco-friendly plots</p>
+                </div>
+            </div>
+            <div class="project-item">
+                <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; height: 350px;">
+                    <img src="img1.jpeg" alt="Green Valley" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="text-center" style="padding: 24px;">
+                    <span class="project-status completed">Completed</span>
+                    <h3 style="font-size: 24px; margin: 15px 0;">Green Valley Estate</h3>
+                    <p style="color: var(--brown-medium);">Luxury eco-friendly plots</p>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; height: 350px;">
+                    <img src="img1.jpeg" alt="Platinum Plaza" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="text-center" style="padding: 24px;">
+                    <span class="project-status ongoing">Ongoing</span>
+                    <h3 style="font-size: 24px; margin: 15px 0;">Platinum Plaza</h3>
+                    <p style="color: var(--brown-medium);">Commercial-residential hybrid</p>
+                </div>
             </div>
         </div>
-    </section>
 
-    <style>
-        .projects-carousel {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            scroll-snap-type: x mandatory;
-            overflow-x: auto;
-            padding: 20px 0;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
+        <div class="project-dots">
+            <div class="dot active" onclick="goToProject(0)"></div>
+            <div class="dot" onclick="goToProject(1)"></div>
+            <div class="dot" onclick="goToProject(2)"></div>
+        </div>
+    </div>
+</section>
+<style>
+    /* RESET & VARIABLES */
+    *,*::before,*::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        /* Dark Blue Background */
+        --brown: #1A2C3E;
+        --brown-dark: #0F1D2E;
+        --brown-medium: #2c4258;
+        --brown-light: #445e77;
+
+        /* Shining Gold */
+        --gold: #FFD700;       
+        --gold-light: #FFF44F; 
+        --gold-pale: #FFE082;  
+        --cream: #F5F3F0;      
+        
+        /* Additional Colors */
+        --cream-dark: #e3ddd3;
+        --available: #25D366;
+        --sold: #ef4444;
+        --reserved: #c5a059;
+        --white: #ffffff;
+        --shadow: 0 4px 32px rgba(26, 44, 62, 0.1);
+        --shadow-lg: 0 16px 48px rgba(26, 44, 62, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: var(--brown);
+        background: var(--cream);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        line-height: 1.15;
+    }
+
+    /* UTILITY */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .text-center { text-align: center; }
+
+    .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(255, 215, 0, 0.12);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        padding: 8px 22px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: clamp(30px, 4.2vw, 46px);
+        margin-bottom: 14px;
+        color: var(--brown);
+        text-wrap: balance;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 30px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        transition: all 0.35s ease;
+    }
+    .btn-primary {
+        background: var(--gold);
+        color: var(--brown-dark);
+        font-weight: 700;
+        box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+    }
+
+    /* --- PROJECT CAROUSEL OVERRIDE --- */
+    .projects-container {
+        position: relative;
+        margin-top: 56px;
+        min-height: 580px; /* Space for the active card */
+        width: 100%;
+    }
+
+    .project-item {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(227, 221, 211, 0.6);
+        transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
+        transform: translateX(30px); /* Slide effect */
+        pointer-events: none;
+        box-shadow: var(--shadow);
+    }
+
+    .project-item.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+        pointer-events: auto;
+        position: relative; /* Allows container to calculate height */
+        box-shadow: var(--shadow-lg);
+    }
+
+    .project-status {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-top: 15px;
+    }
+
+    .project-status.ongoing { background: rgba(34, 197, 94, 0.1); color: #16a34a; }
+    .project-status.completed { background: rgba(197, 160, 89, 0.1); color: var(--gold); }
+
+    /* DOTS FOR PROJECT CAROUSEL */
+    .project-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 40px;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(26, 44, 62, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .dot.active {
+        background: var(--gold);
+        width: 32px;
+        border-radius: 6px;
+    }
+
+    /* --- RESPONSIVE FIXES --- */
+    @media (max-width: 768px) {
+        .projects-container {
+            min-height: 500px;
         }
-
-        .projects-carousel::-webkit-scrollbar {
-            height: 8px;
+        .section {
+            padding: 60px 0;
         }
-
-        .projects-carousel::-webkit-scrollbar-track {
-            background: var(--cream-dark);
-            border-radius: 10px;
-        }
-
-        .projects-carousel::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
-        }
-
         .project-item {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(227, 221, 211, 0.6);
-            transition: all 0.4s;
-            cursor: pointer;
-            min-width: 100%;
-            scroll-snap-align: start;
-            flex-shrink: 0;
+            transform: translateX(0) scale(0.95); /* Simpler mobile transition */
         }
-
-        .project-item:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-status {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .project-status.ongoing {
-            background: rgba(34, 197, 94, 0.1);
-            color: #16a34a;
-        }
-
-        .project-status.completed {
-            background: rgba(197, 160, 89, 0.1);
-            color: var(--gold);
-        }
-
-        .carousel-prev, .carousel-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--gold);
-            color: var(--brown-dark);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 10;
-        }
-
-        .carousel-prev:hover, .carousel-next:hover {
-            background: var(--gold-light);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .carousel-prev { left: -50px; }
-        .carousel-next { right: -50px; }
-
-        @media (max-width: 1024px) {
-            .projects-carousel {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .projects-carousel {
-                grid-template-columns: 1fr;
-            }
-            .carousel-prev, .carousel-next { display: none; }
-        }
-    </style>
-
+    }
+</style>
     <!-- SERVICES SECTION -->
-    <section class="services-section section" id="services">
+<section class="services-section section" id="services">
         <div class="container">
             <div class="text-center">
                 <p class="section-label">What We Offer</p>
                 <h2 class="section-title">Our Services</h2>
-                <p class="section-subtitle">If you are looking to invest in sites in Mysore, we offer a multitude of services for the same at GSS Projects</p>
+                <p class="section-subtitle">If you are looking to invest in sites in Mysore, we offer a multitude of services for the same at Smaya</p>
             </div>
             <div class="services-grid" style="margin-top: 56px;">
                 <div class="service-card">
                     <div class="service-icon">🏘️</div>
                     <h3>Land Procurement</h3>
-                    <p>GSS Projects is connected with many small and big real estate agents. We liaison with top officials in government departments to facilitate the processes.</p>
+                    <p>Smaya is connected with many small and big real estate agents. We liaison with top officials in government departments to facilitate the processes.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📊</div>
                     <h3>Marketing</h3>
-                    <p>GSS Projects markets sites and plots in Mysore with an in-house marketing team of executives and extensive database of prospective buyers.</p>
+                    <p>Smaya markets sites and plots in Mysore with an in-house marketing team of executives and extensive database of prospective buyers.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📐</div>
                     <h3>Layout Development</h3>
-                    <p>GSS Projects has expertise in outright purchase of land and mediation to facilitate purchase from owner to buyer for layout development.</p>
+                    <p>Smaya has expertise in outright purchase of land and mediation to facilitate purchase from owner to buyer for layout development.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🏗️</div>
                     <h3>Turnkey Projects</h3>
-                    <p>GSS Projects can facilitate project development and marketing for other parties. Contact us if you have properties to develop.</p>
+                    <p>Smaya can facilitate project development and marketing for other parties. Contact us if you have properties to develop.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🤝</div>
                     <h3>Joint Development</h3>
-                    <p>GSS Projects is ready to develop land for layouts with owners and other builders. Your search for a joint venture ends here.</p>
+                    <p>Smaya is ready to develop land for layouts with owners and other builders. Your search for a joint venture ends here.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📋</div>
                     <h3>Department Clearance</h3>
-                    <p>GSS Projects ensures clear title for the plot apart from trading encumbrances. We get the paperwork done professionally.</p>
+                    <p>Smaya ensures clear title for the plot apart from trading encumbrances. We get the paperwork done professionally.</p>
                 </div>
             </div>
         </div>
@@ -1273,17 +1459,12 @@
                     <p>Founded with a vision to provide premium residential properties in Mysore, Smaya Developers has been a trusted name in real estate for over a decade. We believe in transparency, quality, and customer satisfaction.</p>
                     <p><strong>Vision:</strong> To become the leading real estate company offering premium plots in Mysore with world-class amenities and excellent customer service.</p>
                     <p><strong>Mission:</strong> To deliver high-quality properties through transparent processes, ensuring customer trust and satisfaction in every transaction.</p>
-                    <p style="margin-top: 24px;"><strong>Key Milestones:</strong></p>
-                    <ul style="margin-left: 20px; margin-top: 12px;">
-                        <li>✓ 500+ Happy Customers</li>
-                        <li>✓ 50+ Completed Projects</li>
-                        <li>✓ RERA Approved</li>
-                        <li>✓ 10+ Years of Excellence</li>
-                    </ul>
+              
+             
+
+                  
                 </div>
-                <div class="about-image">
-                    <img src="LOGO FINAL PNG.png" alt="About Smaya Developers">
-                </div>
+               
             </div>
         </div>
     </section>
@@ -1365,56 +1546,6 @@
         </div>
     </section>
 
-    <!-- BLOG SECTION CAROUSEL -->
-    <section class="blog-section section" id="blog">
-        <div class="container">
-            <div class="text-center">
-                <p class="section-label">Latest Updates</p>
-                <h2 class="section-title">Our Blog & News</h2>
-                <p class="section-subtitle">Stay updated with the latest news, tips, and insights about real estate investment in Mysore</p>
-            </div>
-            <div class="blog-carousel">
-                <div class="blog-card active" onclick="window.location.href='blog.html'">
-                    <div class="blog-image">
-                        <img src="img5.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date">Mar 04, 2026</div>
-                        <h3>Real Estate Investment Tips for 2026</h3>
-                        <p>Learn how to make smart real estate investments in Mysore and get better returns on your capital.</p>
-                        <a href="blog.html" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card" onclick="window.location.href='blog.html'">
-                    <div class="blog-image">
-                        <img src="img6.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date">Feb 28, 2026</div>
-                        <h3>Why Mysore is the Best Investment Hub</h3>
-                        <p>Discover why Mysore is becoming India's most sought-after real estate destination for investors.</p>
-                        <a href="blog.html" class="read-more">Read More →</a>
-                    </div>
-                </div>
-                <div class="blog-card" onclick="window.location.href='blog.html'">
-                    <div class="blog-image">
-                        <img src="img7.png" alt="Blog Post">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-date">Feb 20, 2026</div>
-                        <h3>RERA Registration: Everything You Need to Know</h3>
-                        <p>Complete guide to understanding RERA registration and how it protects property buyers.</p>
-                        <a href="blog.html" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-indicator">
-                <div class="indicator-dot active" onclick="showBlog(0)"></div>
-                <div class="indicator-dot" onclick="showBlog(1)"></div>
-                <div class="indicator-dot" onclick="showBlog(2)"></div>
-            </div>
-        </div>
-    </section>
 
     <!-- CONTACT SECTION -->
     <section class="contact-section section" id="contact">
@@ -1484,14 +1615,16 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h4 style="color: var(--cream); text-transform: none; margin-bottom: 12px;">Smaya Developers</h4>
-                    <p>Premium residential plots in Mysore with world-class amenities and professional real estate solutions.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon" title="Facebook">f</a>
-                        <a href="#" class="social-icon" title="Instagram">📷</a>
-                        <a href="#" class="social-icon" title="Twitter">𝕏</a>
-                        <a href="#" class="social-icon" title="LinkedIn">in</a>
-                    </div>
+                  
+ <div class="footer-brand">
+    <h4 style="color: var(--cream); text-transform: none; margin-bottom: 12px;">Smaya Developers</h4>
+    <p>Premium residential plots in Mysore with world-class amenities and professional real estate solutions.</p>
+    
+    <a href="https://www.instagram.com/smaya_developers" target="_blank" class="insta-wrapper" title="Sync to Instagram Page">
+        <i class="fab fa-instagram insta-real"></i>
+        <span class="insta-text">Visit our Instagram</span>
+    </a>
+</div>
                 </div>
                 <div>
                     <h4>Quick Links</h4>
@@ -1505,7 +1638,7 @@
                 <div>
                     <h4>Information</h4>
                     <div class="footer-links">
-                        <a href="blog.html">Blog</a>
+
                         <a href="#">Careers</a>
                         <a href="#">CSR</a>
                         <a href="#">Partnership</a>
@@ -1710,10 +1843,27 @@
                 openContactModal();
             });
         });
+
+
+
+        let currentProject = 0;
+const projectSlides = document.querySelectorAll('.project-item');
+const projectDots = document.querySelectorAll('.project-dots .dot');
+
+function goToProject(n) {
+    projectSlides.forEach(slide => slide.classList.remove('active'));
+    projectDots.forEach(dot => dot.classList.remove('active'));
+    
+    projectSlides[n].classList.add('active');
+    projectDots[n].classList.add('active');
+    currentProject = n;
+}
+
+// Optional: Auto-rotate every 6 seconds
+setInterval(() => {
+    currentProject = (currentProject + 1) % projectSlides.length;
+    goToProject(currentProject);
+}, 3000);
     </script>
 </body>
 </html>
-
-
-
-
