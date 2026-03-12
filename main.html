@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | Smaya Developers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & VARIABLES */
+        *,*::before,*::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --brown: #1A2C3E;
+            --brown-dark: #0F1D2E;
+            --brown-medium: #2c4258;
+            --brown-light: #445e77;
+            --gold: #FFD700;
+            --gold-light: #FFF44F;
+            --gold-pale: #FFE082;
+            --cream: #F5F3F0;
+            --cream-dark: #e3ddd3;
+            --available: #25D366;
+            --sold: #ef4444;
+            --reserved: #c5a059;
+            --white: #ffffff;
+            --shadow: 0 4px 32px rgba(26, 44, 62, 0.1);
+            --shadow-lg: 0 16px 48px rgba(26, 44, 62, 0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--brown);
+            background: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+
+        /* UTILITY */
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 96px 0; }
+        .text-center { text-align: center; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.35s ease;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(197, 160, 89, 0.35);
+        }
+
+        /* REAL INSTAGRAM GRADIENT LOGO */
+/* REAL INSTAGRAM BRANDING */
+.insta-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-top: 16px;
+    transition: transform 0.3s ease;
+}
+
+.insta-wrapper:hover {
+    transform: translateX(5px);
+}
+
+.insta-real {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 28px; /* Slightly larger logo */
+}
+
+.insta-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold); /* Matches your SMAYA gold */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+        /* FIXED TOP BAR */
+        .fixed-top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 8px 24px;
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .top-left { display: flex; align-items: center; gap: 12px; }
+        .top-right { display: flex; align-items: center; gap: 12px; }
+        .datetime { color: var(--gold); font-weight: 500; white-space: nowrap; }
+        .contact-number { color: var(--gold); font-weight: 600; white-space: nowrap; }
+
+        /* NAVBAR */
+        .navbar {
+            position: sticky;
+            top: 31px;
+            z-index: 999;
+            background: var(--brown);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--gold);
+            transition: box-shadow 0.3s;
+        }
+
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(26, 44, 62, 0.2); }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover { transform: scale(1.05); }
+
+        .logo img { width: 80px; height: auto; display: block;  }
+        .logo span { color: var(--gold); font-size: 20px; }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            font-size: 13px;
+            border-radius: 50px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2c4258;
+            z-index: 2000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            padding-top: 80px;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            color: var(--cream);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            color: var(--cream);
+            font-size: 32px;
+            line-height: 1;
+        }
+        .datetime { color: var(--gold); font-weight: 500; white-space: nowrap; }
+        .contact-number { color: var(--gold); font-weight: 600; white-space: nowrap; }
+
+        /* NAVBAR */
+        .navbar {
+            position: sticky;
+            top: 31px;
+            z-index: 999;
+            background: var(--brown);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--gold);
+            transition: box-shadow 0.3s;
+        }
+
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(26, 44, 62, 0.2); }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover { transform: scale(1.05); }
+        .logo img { width: 80px; height: auto; display: block; }
+        .logo span { color: var(--gold); font-size: 20px; }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #0F1D2E 0%, var(--brown-dark) 40%, var(--brown) 70%, #1A2C3E 100%);
+            color: var(--cream);
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 31px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(32px, 4.5vw, 56px);
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: rgba(245, 242, 237, 0.6);
+        }
+
+        /* PROJECTS GRID */
+        .projects-section { background: var(--white); padding: 96px 0; }
+
+        .project-tabs {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 56px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 28px;
+            border: 2px solid rgba(197, 160, 89, 0.3);
+            background: transparent;
+            color: var(--brown);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--brown-dark);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .project-card {
+            background: var(--cream);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-pale);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background: var(--cream-dark);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.08);
+        }
+
+        .project-status-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-ongoing {
+            background: rgba(34, 197, 94, 0.15);
+            color: #16a34a;
+        }
+
+        .status-completed {
+            background: rgba(74, 222, 128, 0.15);
+            color: #22c55e;
+        }
+
+        .status-upcoming {
+            background: rgba(59, 130, 246, 0.15);
+            color: #2563eb;
+        }
+
+        .project-content {
+            padding: 28px;
+        }
+
+        .project-card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--brown);
+        }
+
+        .project-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .project-info-label {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .project-info-value {
+            color: var(--brown-medium);
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(227, 221, 211, 0.5);
+            margin-top: 16px;
+        }
+
+        .btn-view {
+            padding: 8px 16px;
+            font-size: 12px;
+            background: transparent;
+            color: var(--gold);
+            border: 1.5px solid var(--gold);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-view:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+
+        /* MODAL - DETAILED PROJECT VIEW */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--white);
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--white);
+            border: none;
+            font-size: 28px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+
+        .modal-hero {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: var(--cream-dark);
+            overflow: hidden;
+        }
+
+        .modal-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-header {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(42, 28, 19, 0.8) 100%);
+            color: var(--cream);
+            padding: 40px 32px 32px;
+        }
+
+        .modal-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .modal-body {
+            padding: 48px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 2px solid rgba(227, 221, 211, 0.3);
+        }
+
+        .detail-item h4 {
+            font-size: 13px;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .detail-item p {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--brown);
+        }
+
+        /* CAROUSEL */
+        .carousel-section {
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 2px solid rgba(227, 221, 211, 0.3);
+        }
+
+        .carousel-section h2 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: var(--brown);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: var(--cream-dark);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeCarousel 0.5s ease;
+        }
+
+        @keyframes fadeCarousel {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: var(--gold);
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 215, 0, 0.8);
+            color: var(--brown-dark);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: 16px;
+        }
+
+        .carousel-next {
+            right: 16px;
+        }
+
+        /* HIGHLIGHTS SECTION */
+        .highlights-section {
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 2px solid rgba(227, 221, 211, 0.3);
+        }
+
+        .highlights-section h2 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: var(--brown);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .highlight-item {
+            padding: 16px;
+            background: var(--cream);
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+            font-size: 13px;
+            color: var(--brown-medium);
+            line-height: 1.6;
+        }
+
+        .highlight-item strong {
+            color: var(--brown);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(227, 221, 211, 0.3);
+        }
+
+        .cta-section .btn {
+            flex: 1;
+        }
+
+        .btn-contact {
+            background: var(--brown);
+            color: var(--cream);
+        }
+
+        .btn-contact:hover {
+            background: var(--brown-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: var(--white);
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba61;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 72px 0 24px;
+            margin-top: 80px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .footer-content {
+            margin-bottom: 24px;
+        }
+
+        .footer-content p {
+            color: rgba(245, 242, 237, 0.7);
+            margin-bottom: 8px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .fixed-top-bar { 
+                flex-direction: row;
+                gap: 4px;
+                padding: 8px 12px;
+                justify-content: space-between;
+            }
+
+            .top-left { width: auto; justify-content: flex-start; }
+            .top-right { width: auto; justify-content: flex-end; }
+
+            .projects-grid { grid-template-columns: 1fr; }
+            .detail-grid { grid-template-columns: 1fr 1fr; }
+            .highlights-grid { grid-template-columns: 1fr; }
+            .cta-section { flex-direction: column; }
+            .modal-hero { height: 250px; }
+            .modal-header h1 { font-size: 22px; }
+            .carousel-container { height: 300px; }
+            .modal-body { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- FIXED TOP BAR -->
+    <div class="fixed-top-bar">
+        <div class="top-left">
+            <span class="datetime" id="datetime"></span>
+        </div>
+        <div class="top-right">
+            <span class="contact-number">📞 +91-9876543210</span>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="main.html" class="logo">
+                <img src="LOGO.PNG" alt="SMAYA Logo">
+                
+            </a>
+            <div class="nav-links">
+                <a href="main.html">Home</a>
+                <a href="project.html" class="active">Projects</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+           
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" id="mobileClose">&times;</button>
+        <a href="main.html">Home</a>
+        <a href="project.html">Projects</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <button class="btn btn-primary">Inquire Now</button>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <h1>Our Projects</h1>
+        <p>Premium Residential & Commercial Developments</p>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="projects-section">
+        <div class="container">
+            <!-- FILTER TABS -->
+            <div class="project-tabs">
+                <button class="tab-btn active" data-filter="all">All Projects</button>
+                <button class="tab-btn" data-filter="completed">Completed</button>
+                <button class="tab-btn" data-filter="ongoing">Ongoing</button>
+                <button class="tab-btn" data-filter="upcoming">Upcoming</button>
+            </div>
+
+            <!-- PROJECTS GRID -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT DETAIL MODAL -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+            <div class="modal-hero">
+                <img id="modalHeroImg" src="" alt="Project">
+                <div class="modal-header">
+                    <span class="modal-badge" id="modalBadge"></span>
+                    <h1 id="modalTitle"></h1>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Key Details Grid -->
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <h4>Land Area</h4>
+                        <p id="modalArea"></p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Total Sites</h4>
+                        <p id="modalSites"></p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Site Dimension</h4>
+                        <p id="modalDimension"></p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Facing</h4>
+                        <p id="modalFacing"></p>
+                    </div>
+                </div>
+
+                <!-- Approvals & RERA -->
+                <div style="margin-bottom: 48px; padding-bottom: 48px; border-bottom: 2px solid rgba(227, 221, 211, 0.3);">
+                    <h2 style="font-size: 28px; margin-bottom: 20px; color: var(--brown);">Approvals & Certifications</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div>
+                            <h4 style="font-size: 13px; color: var(--gold); text-transform: uppercase; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px;">Authority Approvals</h4>
+                            <p id="modalApprovals" style="font-size: 14px; color: var(--brown-medium); line-height: 1.8;"></p>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 13px; color: var(--gold); text-transform: uppercase; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px;">RERA Status</h4>
+                            <p id="modalRera" style="font-size: 14px; color: var(--brown-medium); line-height: 1.8;"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location & Map -->
+                <div style="margin-bottom: 48px; padding-bottom: 48px; border-bottom: 2px solid rgba(227, 221, 211, 0.3);">
+                    <h2 style="font-size: 28px; margin-bottom: 20px; color: var(--brown);">Location</h2>
+                    <p id="modalLocation" style="font-size: 14px; color: var(--brown-medium); line-height: 1.8; margin-bottom: 16px;"></p>
+                    <a id="modalMapLink" href="#" target="_blank" class="btn btn-primary" style="display: inline-flex;">
+                        <i class="fas fa-map-marker-alt"></i> View on Google Maps
+                    </a>
+                </div>
+
+                <!-- Layout Carousel -->
+                <div class="carousel-section">
+                    <h2>Layout Design</h2>
+                    <div class="carousel-container">
+                        <div id="carouselSlides"></div>
+                        <button class="carousel-btn carousel-prev" onclick="prevSlide()">&lsaquo;</button>
+                        <button class="carousel-btn carousel-next" onclick="nextSlide()">&rsaquo;</button>
+                        <div class="carousel-controls" id="carouselControls"></div>
+                    </div>
+                </div>
+
+                <!-- Highlights -->
+                <div class="highlights-section">
+                    <h2>Project Highlights</h2>
+                    <div class="highlights-grid" id="modalHighlights"></div>
+                </div>
+
+                <!-- CTA -->
+                <div class="cta-section">
+                    <button class="btn btn-contact">
+                        <i class="fas fa-phone"></i> Contact Us
+                    </button>
+                    <button class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Smaya Developers. All rights reserved.</p>
+                <p>Premium Real Estate Solutions</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Projects Data
+        const projects = [
+            {
+                id: 1,
+                name: "Elegant Heights",
+                status: "completed",
+                area: "15 Acres",
+                sites: "120 Sites",
+                dimension: "30x40 ft",
+                facing: "East Facing",
+                address: "HSR Layout, Bangalore - 560034",
+                mapLink: "https://goo.gl/maps/example1",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
+                layoutImages: [
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
+                    "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+                    "https://images.unsplash.com/photo-1512207736139-fb3ee445b165?w=800",
+                    "https://images.unsplash.com/photo-1503780671245-14d5df72c9a2?w=800",
+                    "https://images.unsplash.com/photo-1560653823-d122175e0f11?w=800"
+                ],
+                approvals: "BBMP, Town Planning, Water & Sewerage Board",
+                rera: "RERA Approved (Reg. No: PRM/KA/2022/00145)",
+                highlights: [
+                    "24/7 Security with CCTV Surveillance",
+                    "Landscaped Gardens & Walking Tracks",
+                    "Community Hall & Recreation Center",
+                    "Children's Play Area",
+                    "Yoga & Meditation Space",
+                    "Rain Water Harvesting System"
+                ]
+            },
+            {
+                id: 2,
+                name: "Green Valley Residency",
+                status: "completed",
+                area: "12 Acres",
+                sites: "95 Sites",
+                dimension: "40x50 ft",
+                facing: "North Facing",
+                address: "Whitefield, Bangalore - 560066",
+                mapLink: "https://goo.gl/maps/example2",
+                image: "https://images.unsplash.com/photo-1512207736139-fb3ee445b165?w=800",
+                layoutImages: [
+                    "https://images.unsplash.com/photo-1512207736139-fb3ee445b165?w=800",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
+                    "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+                    "https://images.unsplash.com/photo-1503780671245-14d5df72c9a2?w=800",
+                    "https://images.unsplash.com/photo-1560653823-d122175e0f11?w=800"
+                ],
+                approvals: "BBMP, BDA, Municipal Corporation",
+                rera: "RERA Approved (Reg. No: PRM/KA/2021/00089)",
+                highlights: [
+                    "Gated Community with Advanced Security",
+                    "Central Park with Water Features",
+                    "Clubhouse with Gymnasium",
+                    "Swimming Pool & Jacuzzi",
+                    "Tennis & Basketball Courts",
+                    "Solar Power Generation"
+                ]
+            },
+            {
+                id: 3,
+                name: "Sunrise Estates",
+                status: "completed",
+                area: "18 Acres",
+                sites: "150 Sites",
+                dimension: "35x45 ft",
+                facing: "East & West Facing",
+                address: "Indiranagar, Bangalore - 560038",
+                mapLink: "https://goo.gl/maps/example3",
+                image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+                layoutImages: [
+                    "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+                    "https://images.unsplash.com/photo-1512207736139-fb3ee445b165?w=800",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
+                    "https://images.unsplash.com/photo-1560653823-d122175e0f11?w=800",
+                    "https://images.unsplash.com/photo-1503780671245-14d5df72c9a2?w=800"
+                ],
+                approvals: "BBMP, BDA, Fire Department",
+                rera: "RERA Approved (Reg. No: PRM/KA/2020/00067)",
+                highlights: [
+                    "Premium Location near Tech Parks",
+                    "Wide Roads with Avenue Trees",
+                    "Multipurpose Community Center",
+                    "Indoor Sports Complex",
+                    "Convenience Stores & Cafeteria",
+                    "Efficient Waste Management System"
+                ]
+            },
+            {
+                id: 4,
+                name: "Marina Heights",
+                status: "ongoing",
+                area: "20 Acres",
+                sites: "180 Sites",
+                dimension: "30x40 ft",
+                facing: "South Facing",
+                address: "Marathahalli, Bangalore - 560037",
+                mapLink: "https://goo.gl/maps/example4",
+                image: "https://images.unsplash.com/photo-1503780671245-14d5df72c9a2?w=800",
+                layoutImages: [
+                    "https://images.unsplash.com/photo-1503780671245-14d5df72c9a2?w=800",
+                    "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+                    "https://images.unsplash.com/photo-1512207736139-fb3ee445b165?w=800",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
+                    "https://images.unsplash.com/photo-1560653823-d122175e0f11?w=800"
+                ],
+                approvals: "BBMP (Pending Final Approval), BDA Approved",
+                rera: "RERA Registration in Progress",
+                highlights: [
+                    "Ultra-Modern Infrastructure",
+                    "Proximity to IT Hubs",
+                    "Commercial & Retail Spaces",
+                    "Smart Home Ready",
+                    "Green Building Features",
+                    "Proposed Shopping Complex"
+                ]
+            },
+            {
+                id: 5,
+                name: "Summit Plaza",
+                status: "upcoming",
+                area: "25 Acres",
+                sites: "200 Sites",
+                dimension: "40x60 ft",
+                facing: "Mixed Facing",
+                address: "Sarjapur Road, Bangalore - 560035",
+                mapLink: "https://goo.gl/maps/example5",
+                image: "https://images.unsplash.com/photo-1560653823-d122175e0f11?w=800",
+                layoutImages: [
+                    "https://images.unsplash.com/photo-1560653823-d122175e0f11?w=800",
+                    "https://images.unsplash.com/photo-1503780671245-14d5df72c9a2?w=800",
+                    "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800",
+                    "https://images.unsplash.com/photo-1512207736139-fb3ee445b165?w=800",
+                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800"
+                ],
+                approvals: "MUDA Approval Expected Soon, DTCP Clearance Pending",
+                rera: "RERA Registration Will be Done Post Approval",
+                highlights: [
+                    "Planned Smart City Infrastructure",
+                    "Commercial District",
+                    "Entertainment Zone",
+                    "Sustainable Living Concept",
+                    "Future-Ready Design",
+                    "Educational Institutes Nearby"
+                ]
+            }
+        ];
+
+        let currentProjectId = null;
+        let currentSlide = 0;
+
+        // Initialize
+        function init() {
+            updateDateTime();
+            renderProjects('all');
+            setupEventListeners();
+        }
+
+        // Update Date & Time
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('datetime').textContent = now.toLocaleString('en-IN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Render Projects
+        function renderProjects(filter) {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? projects : projects.filter(p => p.status === filter);
+
+            filtered.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.onclick = () => openProjectModal(project.id);
+
+                let badgeClass = '';
+                if (project.status === 'completed') badgeClass = 'status-completed';
+                else if (project.status === 'ongoing') badgeClass = 'status-ongoing';
+                else badgeClass = 'status-upcoming';
+
+                card.innerHTML = `
+                    <div class="project-image">
+                        <img src="${project.image}" alt="${project.name}">
+                        <span class="project-status-badge ${badgeClass}">${project.status}</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>${project.name}</h3>
+                        <div class="project-info-row">
+                            <span class="project-info-label">Land Area:</span>
+                            <span class="project-info-value">${project.area}</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="project-info-label">Total Sites:</span>
+                            <span class="project-info-value">${project.sites}</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="project-info-label">Dimension:</span>
+                            <span class="project-info-value">${project.dimension}</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="project-info-label">Facing:</span>
+                            <span class="project-info-value">${project.facing}</span>
+                        </div>
+                        <div class="project-footer">
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Open Project Modal
+        function openProjectModal(projectId) {
+            currentProjectId = projectId;
+            currentSlide = 0;
+            const project = projects.find(p => p.id === projectId);
+
+            document.getElementById('modalHeroImg').src = project.image;
+            document.getElementById('modalTitle').textContent = project.name;
+            document.getElementById('modalBadge').textContent = project.status;
+            document.getElementById('modalArea').textContent = project.area;
+            document.getElementById('modalSites').textContent = project.sites;
+            document.getElementById('modalDimension').textContent = project.dimension;
+            document.getElementById('modalFacing').textContent = project.facing;
+            document.getElementById('modalApprovals').textContent = project.approvals;
+            document.getElementById('modalRera').textContent = project.rera;
+            document.getElementById('modalLocation').textContent = project.address;
+            document.getElementById('modalMapLink').href = project.mapLink;
+
+            // Render Carousel
+            const carouselSlides = document.getElementById('carouselSlides');
+            carouselSlides.innerHTML = '';
+            project.layoutImages.forEach((img, index) => {
+                const slide = document.createElement('div');
+                slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+                slide.innerHTML = `<img src="${img}" alt="Layout ${index + 1}">`;
+                carouselSlides.appendChild(slide);
+            });
+
+            // Render Carousel Controls
+            const controls = document.getElementById('carouselControls');
+            controls.innerHTML = '';
+            project.layoutImages.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(index);
+                controls.appendChild(dot);
+            });
+
+            // Render Highlights
+            const highlights = document.getElementById('modalHighlights');
+            highlights.innerHTML = '';
+            project.highlights.forEach(highlight => {
+                const item = document.createElement('div');
+                item.className = 'highlight-item';
+                item.innerHTML = `<strong>✓</strong> ${highlight}`;
+                highlights.appendChild(item);
+            });
+
+            document.getElementById('projectModal').classList.add('active');
+        }
+
+        // Close Modal
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.remove('active');
+            currentProjectId = null;
+        }
+
+        // Carousel Functions
+        function nextSlide() {
+            const project = projects.find(p => p.id === currentProjectId);
+            currentSlide = (currentSlide + 1) % project.layoutImages.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            const project = projects.find(p => p.id === currentProjectId);
+            currentSlide = (currentSlide - 1 + project.layoutImages.length) % project.layoutImages.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderProjects(this.dataset.filter);
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Close modal on background click
+            document.getElementById('projectModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeProjectModal();
+                }
+            });
+        }
+
+        // Start
+        init();
+        setInterval(updateDateTime, 1000);
+
+        // NAVBAR SCROLL EFFECT
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // MOBILE MENU TOGGLE
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileClose = document.getElementById('mobileClose');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // RESPONSIVE HAMBURGER TOGGLE
+        function toggleHamburgerVisibility() {
+            const navLinks = document.querySelector('.nav-links');
+            if (window.innerWidth <= 768) {
+                hamburger.style.display = 'flex';
+                navLinks.style.display = 'none';
+            } else {
+                hamburger.style.display = 'none';
+                navLinks.style.display = 'flex';
+            }
+        }
+
+        window.addEventListener('resize', toggleHamburgerVisibility);
+        toggleHamburgerVisibility();
+    </script>
+</body>
+</html>

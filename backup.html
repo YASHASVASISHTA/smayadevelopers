@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smaya Developers | Premium Plots in Mysore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & VARIABLES */
+        *,*::before,*::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* Dark Blue Background - Matches Logo */
+            --brown: #1A2C3E;
+            --brown-dark: #0F1D2E;
+            --brown-medium: #2c4258;
+            --brown-light: #445e77;
+
+            /* Shining Gold - Matches SMAYA Logo */
+            --gold: #FFD700;       /* Bright shining gold */
+            --gold-light: #FFF44F; /* Ultra bright sunshine gold */
+            --gold-pale: #FFE082;  /* Soft gold for accents */
+            --cream: #F5F3F0;      /* Clean off-white */
+            
+            /* Additional Colors */
+            --cream-dark: #e3ddd3;
+            --available: #25D366 ;
+            --sold: #ef4444;
+            --reserved: #c5a059;
+            --white: #ffffff;
+            --shadow: 0 4px 32px rgba(26, 44, 62, 0.1);
+            --shadow-lg: 0 16px 48px rgba(26, 44, 62, 0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--brown);
+            background: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+        input, textarea, select { font-family: inherit; outline: none; }
+
+        /* UTILITY */
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 96px 0; }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(255, 215, 0, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 8px 22px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: clamp(30px, 4.2vw, 46px);
+            margin-bottom: 14px;
+            color: var(--brown);
+            text-wrap: balance;
+        }
+        .section-subtitle {
+            font-size: 15px;
+            color: var(--brown-medium);
+            max-width: 560px;
+            margin: 0 auto 56px;
+            line-height: 1.7;
+        }
+        .text-center { text-align: center; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.35s ease;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 215, 0, 0.5);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .btn-brown {
+            background: var(--brown);
+            color: var(--cream);
+            border-radius: 50px;
+        }
+        .btn-brown:hover {
+            background: var(--brown-dark);
+            transform: translateY(-2px);
+        }
+
+        /* FIXED TOP BAR */
+        .fixed-top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 8px 24px;
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .top-left { display: flex; align-items: center; gap: 12px; }
+        .top-right { display: flex; align-items: center; gap: 12px; }
+        .datetime { color: var(--gold); font-weight: 500; white-space: nowrap; }
+        .contact-number { color: var(--gold); font-weight: 600; white-space: nowrap; }
+
+        /* NAVBAR */
+        .navbar {
+            position: sticky;
+            top: 50px;
+            z-index: 999;
+            background: var(--brown);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--gold);
+            transition: box-shadow 0.3s;
+        }
+
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(26, 44, 62, 0.2); }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover { transform: scale(1.05); }
+
+        .logo img { width: 80px; height: auto; display: block;  }
+        .logo span { color: var(--gold); font-size: 20px; }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            font-size: 13px;
+            border-radius: 50px;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--brown);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(42, 28, 19, 0.97);
+            z-index: 2000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            padding-top: 80px;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            color: var(--cream);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            color: var(--cream);
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #0F1D2E 0%, var(--brown-dark) 40%, var(--brown) 70%, #1A2C3E 100%);
+            color: var(--cream);
+            padding: 100px 0 88px;
+            position: relative;
+            overflow: hidden;
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5.5vw, 64px);
+            margin-bottom: 22px;
+            line-height: 1.06;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 em { color: var(--gold); font-style: normal; }
+
+        .hero p {
+            font-size: 17px;
+            color: rgba(245, 242, 237, 0.6);
+            margin-bottom: 40px;
+            max-width: 520px;
+            line-height: 1.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
+        }
+
+        /* BANNER CAROUSEL */
+        .banner-carousel {
+            position: relative;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--cream-dark);
+            margin-bottom: 40px;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .carousel-item.active { opacity: 1; }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active { background: var(--gold); width: 28px; border-radius: 5px; }
+
+        /* SERVICES SECTION */
+        .services-section { background: var(--white); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 40px 28px;
+            background: var(--cream);
+            border-radius: 16px;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            transition: all 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-pale);
+        }
+
+        .service-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.12), rgba(197, 160, 89, 0.04));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 14px;
+            color: var(--brown);
+        }
+
+        .service-card p {
+            font-size: 13.5px;
+            color: var(--brown-medium);
+            line-height: 1.7;
+        }
+
+        /* ABOUT SECTION */
+        .about-section {
+            background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--brown);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--brown-medium);
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* TESTIMONIALS CAROUSEL */
+        .testimonials-section { background: var(--white); }
+
+        .testimonials-carousel {
+            position: relative;
+            margin-top: 56px;
+            min-height: 280px;
+        }
+
+        .testimonial-card {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .testimonial-card.active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card p {
+            color: var(--brown-medium);
+            margin-bottom: 16px;
+            line-height: 1.7;
+            font-size: 13.5px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(227, 221, 211, 0.5);
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--brown-dark);
+        }
+
+        .author-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--brown);
+        }
+
+        .author-info p {
+            font-size: 11px;
+            color: var(--brown-medium);
+            margin: 0;
+        }
+
+        .carousel-indicator {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator-dot.active {
+            background: var(--gold);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* BLOG SECTION CAROUSEL */
+        .blog-section { background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%); }
+
+        .blog-carousel {
+            position: relative;
+            margin-top: 56px;
+            min-height: 380px;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: opacity 0.5s ease-in-out;
+            cursor: pointer;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .blog-card.active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: var(--cream-dark);
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .blog-card:hover .blog-image img { transform: scale(1.06); }
+
+        .blog-content {
+            padding: 24px;
+        }
+
+        .blog-date {
+            font-size: 11px;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .blog-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--brown);
+        }
+
+        .blog-card p {
+            font-size: 13px;
+            color: var(--brown-medium);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* CONTACT SECTION */
+        .contact-section { background: var(--white); }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--brown);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--brown);
+            background: var(--cream);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .info-block h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--brown);
+        }
+
+        .info-block p {
+            color: var(--brown-medium);
+            font-size: 13.5px;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 72px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-brand p {
+            font-size: 13.5px;
+            color: rgba(245, 242, 237, 0.5);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: rgba(245, 242, 237, 0.6);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--gold); }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .social-icon:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(197, 160, 89, 0.2);
+            margin: 32px 0;
+        }
+
+        .footer-bottom {
+           display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 0;
+            font-size: 12px;
+            color: rgba(245, 242, 237, 0.5);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom a {
+            color: rgba(245, 242, 237, 0.6);
+            transition: color 0.3s;
+        }
+
+        .footer-bottom a:hover { color: var(--gold); }
+
+        /* VIBRANT WHATSAPP BUTTON */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 65px;
+            height: 65px;
+            background: #25d366;
+            background: linear-gradient(135deg, #25d366 0%, #1da853 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            animation: whatsapp-pulse 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.8);
+        }
+
+        @keyframes whatsapp-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.9); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .modal-header {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--brown);
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .modal-subtitle {
+            font-size: 13px;
+            color: var(--brown-medium);
+            margin-bottom: 24px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--brown-medium);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--brown);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+
+            .services-grid,
+            .footer-grid { grid-template-columns: 1fr; }
+
+            .about-content,
+            .contact-content { grid-template-columns: 1fr; gap: 40px; }
+
+            .hero-buttons { flex-direction: column; }
+
+            .fixed-top-bar { flex-direction: row; gap: 4px; }
+            .top-left, .top-right { width: auto; justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <!-- FIXED TOP BAR -->
+    <div class="fixed-top-bar">
+        <div class="top-left">
+            <div class="datetime" id="datetime">
+                <span id="dateTime">Loading...</span>
+            </div>
+        </div>
+<div class="top-right">
+    <div class="contact-number">
+        <a href="tel:+919876543210" style="text-decoration: none; color: inherit;">
+            📞 +91-9876543210
+        </a>
+    </div>
+</div>    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="logo">
+                <img src="logo.png" alt="Smaya Developers Logo">
+                <span>SMAYA</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home" class="acti ve">Home</a>
+                <a href="#projects">Projects</a>
+                <a href="#services">Services</a>
+                <a href="#about">About Us</a>
+                <a href="#why-us">Why Choose Us</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+            <button class="btn btn-primary nav-cta" onclick="openContactModal()">Get In Touch</button>
+            <button class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
+        <a href="#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
+        <a href="#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="#about" onclick="toggleMobileMenu()">About Us</a>
+        <a href="#why-us" onclick="toggleMobileMenu()">Why Choose Us</a>
+        <a href="#blog" onclick="toggleMobileMenu()">Blog</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact Us</a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Premium Properties in Mysore</div>
+                <h1>Premium <em>Plots for Sale</em> in Mysore</h1>
+                <p>Discover the finest residential plots in 3rd Stage Vijayanagar with world-class amenities, RERA approval, and A-Khata properties. Your dream home awaits!</p>
+               <div class="hero-buttons">
+    <button class="btn btn-primary" onclick="openContactModal()">Book Plot Online</button>
+    <button class="btn btn-outline" onclick="openContactModal()">Contact Us</button>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER CAROUSEL -->
+    <section style="padding: 60px 0; background: var(--cream);">
+        <div class="container">
+            <div class="banner-carousel">
+                <div class="carousel-item active">
+                    <img src="L.png" alt="Premium Plot">
+                </div>
+                <div class="carousel-item">
+                    <img src="img2.png" alt="Project Overview">
+                </div>
+                <div class="carousel-item">
+                    <img src="img3.png" alt="Amenities">
+                </div>
+                <div class="carousel-dots">
+                    <div class="dot active" onclick="goToSlide(0)"></div>
+                    <div class="dot" onclick="goToSlide(1)"></div>
+                    <div class="dot" onclick="goToSlide(2)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" style="background: var(--white);" id="projects">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Our Portfolio</p>
+                <h2 class="section-title">Our Projects</h2>
+                <p class="section-subtitle">Explore our completed and ongoing projects in Mysore</p>
+            </div>
+            
+            <!-- Projects Carousel -->
+            <div style="margin-top: 56px; position: relative;">
+                <div class="projects-carousel" id="projectsCarousel">
+                    <!-- Project 1 -->
+                    <div class="project-item">
+                        <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; margin-bottom: 20px; height: 300px;">
+                            <img src="img1.png" alt="Vijayanagar Heights" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="padding: 0 16px;">
+                            <span class="project-status ongoing">Ongoing</span>
+                            <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--brown);">Vijayanagar Heights</h3>
+                            <p style="color: var(--brown-medium); font-size: 13.5px; margin-bottom: 12px;">Premium residential plots with modern amenities in 3rd Stage Vijayanagar</p>
+                            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--gold); margin-bottom: 12px;">
+                                <span>📍 Mysore</span>
+                                <span>2500+ sqft</span>
+                            </div>
+                            <p style="color: var(--gold); font-weight: 600; margin-bottom: 14px;">₹45,00,000 - ₹65,00,000</p>
+                            <a href="project.html" class="read-more">View Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-item">
+                        <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; margin-bottom: 20px; height: 300px;">
+                            <img src="img8.png" alt="Green Valley Estate" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="padding: 0 16px;">
+                            <span class="project-status completed">Completed</span>
+                            <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--brown);">Green Valley Estate</h3>
+                            <p style="color: var(--brown-medium); font-size: 13.5px; margin-bottom: 12px;">Luxury plots with eco-friendly features and premium infrastructure</p>
+                            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--gold); margin-bottom: 12px;">
+                                <span>📍 Mysore</span>
+                                <span>3000+ sqft</span>
+                            </div>
+                            <p style="color: var(--gold); font-weight: 600; margin-bottom: 14px;">₹52,00,000 - ₹75,00,000</p>
+                            <a href="project.html" class="read-more">View Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-item">
+                        <div style="background: var(--cream-dark); border-radius: 16px; overflow: hidden; margin-bottom: 20px; height: 300px;">
+                            <img src="img9.png" alt="Platinum Plaza" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="padding: 0 16px;">
+                            <span class="project-status ongoing">Ongoing</span>
+                            <h3 style="font-size: 20px; margin: 16px 0 8px; color: var(--brown);">Platinum Plaza</h3>
+                            <p style="color: var(--brown-medium); font-size: 13.5px; margin-bottom: 12px;">Commercial-residential hybrid plots with excellent connectivity</p>
+                            <div style="display: flex; gap: 16px; font-size: 13px; color: var(--gold); margin-bottom: 12px;">
+                                <span>📍 Mysore</span>
+                                <span>2800+ sqft</span>
+                            </div>
+                            <p style="color: var(--gold); font-weight: 600; margin-bottom: 14px;">₹40,00,000 - ₹58,00,000</p>
+                            <a href="project.html" class="read-more">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-prev" onclick="scrollProjects('prev')">❮</button>
+                <button class="carousel-next" onclick="scrollProjects('next')">❯</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="project.html" class="btn btn-primary">See All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .projects-carousel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            scroll-snap-type: x mandatory;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .projects-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .projects-carousel::-webkit-scrollbar-track {
+            background: var(--cream-dark);
+            border-radius: 10px;
+        }
+
+        .projects-carousel::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        .project-item {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            transition: all 0.4s;
+            cursor: pointer;
+            min-width: 100%;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+        }
+
+        .project-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .project-status.ongoing {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+
+        .project-status.completed {
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold);
+        }
+
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-prev:hover, .carousel-next:hover {
+            background: var(--gold-light);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev { left: -50px; }
+        .carousel-next { right: -50px; }
+
+        @media (max-width: 1024px) {
+            .projects-carousel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-carousel {
+                grid-template-columns: 1fr;
+            }
+            .carousel-prev, .carousel-next { display: none; }
+        }
+    </style>
+
+    <!-- SERVICES SECTION -->
+    <section class="services-section section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">What We Offer</p>
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">If you are looking to invest in sites in Mysore, we offer a multitude of services for the same at GSS Projects</p>
+            </div>
+            <div class="services-grid" style="margin-top: 56px;">
+                <div class="service-card">
+                    <div class="service-icon">🏘️</div>
+                    <h3>Land Procurement</h3>
+                    <p>GSS Projects is connected with many small and big real estate agents. We liaison with top officials in government departments to facilitate the processes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Marketing</h3>
+                    <p>GSS Projects markets sites and plots in Mysore with an in-house marketing team of executives and extensive database of prospective buyers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📐</div>
+                    <h3>Layout Development</h3>
+                    <p>GSS Projects has expertise in outright purchase of land and mediation to facilitate purchase from owner to buyer for layout development.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Turnkey Projects</h3>
+                    <p>GSS Projects can facilitate project development and marketing for other parties. Contact us if you have properties to develop.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Joint Development</h3>
+                    <p>GSS Projects is ready to develop land for layouts with owners and other builders. Your search for a joint venture ends here.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Department Clearance</h3>
+                    <p>GSS Projects ensures clear title for the plot apart from trading encumbrances. We get the paperwork done professionally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section class="about-section section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="section-label">Our Story</p>
+                    <h3>About Smaya Developers</h3>
+                    <p>Founded with a vision to provide premium residential properties in Mysore, Smaya Developers has been a trusted name in real estate for over a decade. We believe in transparency, quality, and customer satisfaction.</p>
+                    <p><strong>Vision:</strong> To become the leading real estate company offering premium plots in Mysore with world-class amenities and excellent customer service.</p>
+                    <p><strong>Mission:</strong> To deliver high-quality properties through transparent processes, ensuring customer trust and satisfaction in every transaction.</p>
+                    <p style="margin-top: 24px;"><strong>Key Milestones:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 12px;">
+                        <li>✓ 500+ Happy Customers</li>
+                        <li>✓ 50+ Completed Projects</li>
+                        <li>✓ RERA Approved</li>
+                        <li>✓ 10+ Years of Excellence</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="LOGO FINAL PNG.png" alt="About Smaya Developers">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section" style="background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);" id="why-us">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Advantages</p>
+                <h2 class="section-title">Why Choose Smaya Developers</h2>
+            </div>
+            <div class="services-grid" style="margin-top: 56px;">
+                <div class="service-card">
+                    <div class="service-icon">✅</div>
+                    <h3>RERA Approved</h3>
+                    <p>All our properties are RERA registered, ensuring legal protection and transparency in every transaction.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📜</div>
+                    <h3>A-Khata Properties</h3>
+                    <p>We deal exclusively with A-Khata properties, guaranteeing authenticity and legal compliance of land titles.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3>Premium Locations</h3>
+                    <p>Our plots are strategically located in prime areas of Mysore with excellent connectivity and amenities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS CAROUSEL -->
+    <section class="testimonials-section section">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Customer Reviews</p>
+                <h2 class="section-title">What Our Customers Say</h2>
+            </div>
+            <div class="testimonials-carousel">
+                <div class="testimonial-card active">
+                    <div class="stars">★★★★★</div>
+                    <p>"Excellent service and professional approach. Smaya Developers made the entire process smooth and transparent. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Plot Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Best investment decision I made. The property value has appreciated significantly. Thank you Smaya for the guidance!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <h4>Priya Singh</h4>
+                            <p>Investor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Very professional team. They understand customer needs and provide suitable options. Five stars for customer care!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">VM</div>
+                        <div class="author-info">
+                            <h4>Vikram Malhotra</h4>
+                            <p>Property Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicator">
+                <div class="indicator-dot active" onclick="showTestimonial(0)"></div>
+                <div class="indicator-dot" onclick="showTestimonial(1)"></div>
+                <div class="indicator-dot" onclick="showTestimonial(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION CAROUSEL -->
+    <section class="blog-section section" id="blog">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Latest Updates</p>
+                <h2 class="section-title">Our Blog & News</h2>
+                <p class="section-subtitle">Stay updated with the latest news, tips, and insights about real estate investment in Mysore</p>
+            </div>
+            <div class="blog-carousel">
+                <div class="blog-card active" onclick="window.location.href='blog.html'">
+                    <div class="blog-image">
+                        <img src="img5.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Mar 04, 2026</div>
+                        <h3>Real Estate Investment Tips for 2026</h3>
+                        <p>Learn how to make smart real estate investments in Mysore and get better returns on your capital.</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card" onclick="window.location.href='blog.html'">
+                    <div class="blog-image">
+                        <img src="img6.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Feb 28, 2026</div>
+                        <h3>Why Mysore is the Best Investment Hub</h3>
+                        <p>Discover why Mysore is becoming India's most sought-after real estate destination for investors.</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card" onclick="window.location.href='blog.html'">
+                    <div class="blog-image">
+                        <img src="img7.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Feb 20, 2026</div>
+                        <h3>RERA Registration: Everything You Need to Know</h3>
+                        <p>Complete guide to understanding RERA registration and how it protects property buyers.</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicator">
+                <div class="indicator-dot active" onclick="showBlog(0)"></div>
+                <div class="indicator-dot" onclick="showBlog(1)"></div>
+                <div class="indicator-dot" onclick="showBlog(2)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section section" id="contact">
+        <div class="container">
+            <div class="text-center">
+                <p class="section-label">Get In Touch</p>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you. Send us a message!</p>
+            </div>
+            <div class="contact-content" style="margin-top: 56px;">
+                <div class="contact-info">
+                    <div class="info-block">
+                        <h4>📍 Mysore Office</h4>
+                        <p>3rd Stage Vijayanagar<br>Mysore - 570017<br>Karnataka, India</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>📍 Bangalore Office</h4>
+                        <p>Koramangala<br>Bangalore - 560034<br>Karnataka, India</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>📞 Contact Information</h4>
+                        <p>Phone: +91-9876543210<br>WhatsApp: +91-9876543210</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>🕐 Working Hours</h4>
+                        <p>Monday to Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM<br>Sunday: Closed</p>
+                    </div>
+                </div>
+                <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <div style="margin-bottom: 40px;">
+                        <h3 style="font-size: 20px; margin-bottom: 12px; color: var(--brown);">Quick Inquiry</h3>
+                        <p style="color: var(--brown-medium); margin-bottom: 20px;">Fill out the form below and we'll get back to you shortly</p>
+                        <button class="btn btn-primary" onclick="openContactModal()">Send Inquiry</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT MODAL -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeContactModal()">✕</button>
+            <div class="modal-header">Get In Touch</div>
+            <div class="modal-subtitle">We'd love to hear from you. Send us your details and we'll respond soon.</div>
+            
+            <form class="contact-form" onsubmit="handleContactForm(event)">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" placeholder="John Doe" id="modalName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" placeholder="+91-9876543210" id="modalPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Message *</label>
+                    <textarea placeholder="Tell us how we can help..." id="modalMessage" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 8px;">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4 style="color: var(--cream); text-transform: none; margin-bottom: 12px;">Smaya Developers</h4>
+                    <p>Premium residential plots in Mysore with world-class amenities and professional real estate solutions.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" title="Facebook">f</a>
+                        <a href="#" class="social-icon" title="Instagram">📷</a>
+                        <a href="#" class="social-icon" title="Twitter">𝕏</a>
+                        <a href="#" class="social-icon" title="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">About Us</a>
+                        <a href="#services">Services</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Information</h4>
+                    <div class="footer-links">
+                        <a href="blog.html">Blog</a>
+                        <a href="#">Careers</a>
+                        <a href="#">CSR</a>
+                        <a href="#">Partnership</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Disclaimer</a>
+                        <a href="#">RERA Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Smaya Developers. All rights reserved.</p>
+                <div>
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/919876543210?text=Hello%20Smaya%20Developers" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.003 2C6.477 2 2 6.477 2 12.003c0 1.89.524 3.66 1.436 5.178l-1.4 5.122 5.242-1.376c1.472.844 3.174 1.332 4.992 1.332 5.526 0 10.003-4.477 10.003-10.003S17.53 2 12.003 2zm5.834 14.167c-.243.684-1.42 1.251-2.007 1.34-.51.077-1.157.108-1.87-.119-.431-.137-.985-.32-1.692-.625-2.98-1.288-4.927-4.29-5.076-4.488-.15-.198-1.213-1.612-1.213-3.074 0-1.462.768-2.182 1.04-2.48.272-.297.593-.37.792-.37.199 0 .397.002.57.01.183.01.428-.071.67.51.247.594.916 2.207.991 2.356.075.148.124.32.025.52-.099.198-.149.323-.298.497-.148.173-.312.387-.446.52-.148.148-.303.31-.13.607.173.297.77 1.27 1.653 2.059 1.135 1.012 2.093 1.325 2.39 1.475.297.15.471.124.644-.075.173-.198.742-.867.94-1.164.198-.298.396-.25.67-.15.271.099 1.732.818 2.03.967.297.148.496.223.57.347.075.124.075.719-.173 1.413z" fill="#25D366"/>
+</svg>
+    </a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // DATE AND TIME
+        function updateDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('dateTime').textContent = `📅 ${date} | 🕐 ${time}`;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // NAVBAR SCROLL EFFECT
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // MOBILE MENU
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
+        // BANNER CAROUSEL
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[n].classList.add('active');
+            dots[n].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Auto-rotate carousel every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // TESTIMONIALS CAROUSEL
+        let currentTestimonial = 0;
+        const testimonialCards = document.querySelectorAll('.testimonials-carousel .testimonial-card');
+        const testimonyIndicators = document.querySelectorAll('.testimonials-carousel + .carousel-indicator .indicator-dot');
+
+        function showTestimonial(n) {
+            testimonialCards.forEach(card => card.classList.remove('active'));
+            testimonyIndicators.forEach(dot => dot.classList.remove('active'));
+            
+            testimonialCards[n].classList.add('active');
+            testimonyIndicators[n].classList.add('active');
+            currentTestimonial = n;
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            showTestimonial(currentTestimonial);
+        }
+
+        setInterval(nextTestimonial, 4000);
+
+        // BLOG CAROUSEL
+        let currentBlog = 0;
+        const blogCards = document.querySelectorAll('.blog-carousel .blog-card');
+        const blogIndicators = document.querySelectorAll('.blog-carousel + .carousel-indicator .indicator-dot');
+
+        function showBlog(n) {
+            blogCards.forEach(card => card.classList.remove('active'));
+            blogIndicators.forEach(dot => dot.classList.remove('active'));
+            
+            blogCards[n].classList.add('active');
+            blogIndicators[n].classList.add('active');
+            currentBlog = n;
+        }
+
+        function nextBlog() {
+            currentBlog = (currentBlog + 1) % blogCards.length;
+            showBlog(currentBlog);
+        }
+
+        setInterval(nextBlog, 4000);
+
+        // PROJECTS CAROUSEL SCROLL
+        function scrollProjects(direction) {
+            const carousel = document.getElementById('projectsCarousel');
+            const scrollAmount = carousel.offsetWidth;
+            
+            if (direction === 'next') {
+                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            } else {
+                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // CONTACT MODAL
+        function openContactModal() {
+            document.getElementById('contactModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeContactModal();
+            }
+        });
+
+        // Handle contact form submission
+        function handleContactForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const phone = document.getElementById('modalPhone').value;
+            const message = document.getElementById('modalMessage').value;
+            
+            // Log form data (in real app, send to server)
+            console.log('Form submitted:', { name, phone, message });
+            
+            // Show success message
+            alert('Thank you! We will contact you shortly.');
+            
+            // Reset form and close modal
+            event.target.reset();
+            closeContactModal();
+        }
+
+        // ACTIVE NAVIGATION LINK
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Update Get In Touch button to open modal
+        document.querySelectorAll('.nav-cta').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openContactModal();
+            });
+        });
+    </script>
+</body>
+</html>

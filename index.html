@@ -389,25 +389,27 @@
         }
 
        /* BANNER CAROUSEL - FIT FULL IMAGE */
+/* Update these specific sections in your <style> */
+
+/* Update the banner-carousel styles */
 .banner-carousel {
     position: relative;
-    height: auto; /* Changed from 300px to auto to allow the image to set the height */
-    min-height: 350px; 
+    width: 100%;
+    max-width: 600px; /* Limits size so a square image isn't giant on desktop */
+    margin: 0 auto 40px;
+    aspect-ratio: 1 / 1; /* Forces the carousel to be square */
     border-radius: 16px;
     overflow: hidden;
-    background: var(--cream-dark);
-    margin-bottom: 40px;
+    background: #f0f0f0;
 }
 
 .carousel-item img {
     width: 100%;
-    height: auto; /* Ensures the image maintains its aspect ratio */
-    max-height: 500px; /* Optional: prevents images from becoming too tall on desktop */
-    object-fit: contain; /* Changed from cover to contain to show the full image */
+    height: 100%;
+    object-fit: contain; 
     display: block;
 }
-
-        .carousel-item {
+    .carousel-item {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -1059,13 +1061,7 @@
 }
 
 /* GLOBAL IMAGE FIX */
-/* GLOBAL IMAGE FIX */
-img {
-    max-width: 100%; 
-    height: auto !important; 
-    display: block; 
-    object-fit: contain; /* This ensures no image in the site gets zoomed/cropped */
-}
+
 /* CONTAINER RESET */
 /* This targets the height of boxes you previously set to 300px or 350px */
 .banner-carousel, 
@@ -1156,18 +1152,18 @@ img {
 </section>
     <!-- BANNER CAROUSEL -->
     
-<!--
+
  <section style="padding: 60px 0; background: var(--cream);">
         <div class="container">
             <div class="banner-carousel">
                 <div class="carousel-item active">
-                    <img src="img11.cdr" alt="Premium Plot">
+                    <img src="Gemini_Generated_Image_520mhe520mhe520m.png" alt="Premium Plot">
                 </div>
                 <div class="carousel-item">
-                    <img src="123.jpeg" alt="Project Overview">
+                    <img src="Gemini_Generated_Image_isi9niisi9niisi9.png" alt="Project Overview">
                 </div>
                 <div class="carousel-item">
-                    <img src="12.jpeg" alt="Amenities">
+                    <img src="Gemini_Generated_Image_520mhe520mhe520m.png" alt="Amenities">
                 </div>
                 <div class="carousel-dots">
                     <div class="dot active" onclick="goToSlide(0)"></div>
@@ -1178,7 +1174,7 @@ img {
         </div>
     </section>   
  
-   <-- PROJECTS SECTION -->
+
 <style>
     /* --- PROJECT CAROUSEL STYLES --- */
     .projects-container {

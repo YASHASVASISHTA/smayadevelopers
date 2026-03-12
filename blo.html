@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & News | Smaya Developers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & VARIABLES */
+        *,*::before,*::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --brown: #3d2b1f;
+            --brown-dark: #2a1c13;
+            --brown-medium: #6b5a4e;
+            --brown-light: #8b7966;
+            --gold: #c5a059;
+            --gold-light: #d4b87a;
+            --gold-pale: #e8d5a8;
+            --cream: #f5f2ed;
+            --cream-dark: #e3ddd3;
+            --white: #ffffff;
+            --shadow: 0 4px 32px rgba(61, 43, 31, 0.08);
+            --shadow-lg: 0 16px 48px rgba(61, 43, 31, 0.12);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--brown);
+            background: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+        button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+
+        /* UTILITY */
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 96px 0; }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(197, 160, 89, 0.08);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 8px 22px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: clamp(30px, 4.2vw, 46px);
+            margin-bottom: 14px;
+            color: var(--brown);
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.35s ease;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(197, 160, 89, 0.35);
+        }
+
+        /* FIXED TOP BAR */
+        .fixed-top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 12px 24px;
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .top-left { display: flex; align-items: center; gap: 20px; }
+        .top-right { display: flex; align-items: center; gap: 20px; }
+        .datetime { color: var(--gold); font-weight: 500; }
+        .contact-number { color: var(--gold); font-weight: 600; }
+
+        /* NAVBAR */
+        .navbar {
+            position: sticky;
+            top: 50px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(227, 221, 211, 0.5);
+            transition: box-shadow 0.3s;
+        }
+
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(61, 43, 31, 0.06); }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--brown);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { width: 40px; height: 40px; }
+        .logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--brown-medium);
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--brown);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--brown);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(42, 28, 19, 0.97);
+            z-index: 2000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            padding-top: 80px;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            color: var(--cream);
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            color: var(--cream);
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(160deg, #1a110b 0%, var(--brown-dark) 30%, var(--brown) 65%, #5a4234 100%);
+            color: var(--cream);
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .page-header h1 {
+            font-size: clamp(32px, 4.5vw, 56px);
+            margin-bottom: 16px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: rgba(245, 242, 237, 0.6);
+        }
+
+        /* BLOG GRID */
+        .blog-section { background: var(--white); }
+
+        .blog-container {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .blog-post {
+            background: var(--cream);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            transition: all 0.4s;
+        }
+
+        .blog-post:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-pale);
+            transform: translateY(-4px);
+        }
+
+        .blog-post-image {
+            width: 100%;
+            height: 320px;
+            background: var(--cream-dark);
+            overflow: hidden;
+        }
+
+        .blog-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .blog-post:hover .blog-post-image img {
+            transform: scale(1.06);
+        }
+
+        .blog-post-content {
+            padding: 32px;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .post-date { color: var(--gold); }
+        .post-author { color: var(--brown-medium); }
+        .post-category {
+            display: inline-block;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold);
+            padding: 4px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .blog-post h2 {
+            font-size: 24px;
+            margin: 16px 0;
+            color: var(--brown);
+            line-height: 1.3;
+        }
+
+        .blog-post p {
+            color: var(--brown-medium);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .read-more-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .read-more-link:hover {
+            gap: 12px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .sidebar-box {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+        }
+
+        .sidebar-box h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--brown);
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gold-pale);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid rgba(227, 221, 211, 0.6);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--brown);
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+        }
+
+        .search-box button {
+            padding: 10px 12px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-box button:hover {
+            background: var(--gold-light);
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .category-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(227, 221, 211, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--brown-medium);
+            font-size: 13px;
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-item a {
+            color: var(--brown-medium);
+            transition: color 0.3s;
+        }
+
+        .category-item a:hover {
+            color: var(--gold);
+        }
+
+        .category-count {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--gold);
+            padding: 2px 8px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recent-posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .recent-post-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(227, 221, 211, 0.3);
+        }
+
+        .recent-post-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-post-item a {
+            color: var(--brown-medium);
+            font-size: 13px;
+            line-height: 1.5;
+            transition: color 0.3s;
+        }
+
+        .recent-post-item a:hover {
+            color: var(--gold);
+        }
+
+        .recent-post-date {
+            font-size: 11px;
+            color: var(--brown-light);
+            margin-top: 4px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--brown-dark);
+            color: var(--cream);
+            padding: 72px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-brand p {
+            font-size: 13.5px;
+            color: rgba(245, 242, 237, 0.5);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: rgba(245, 242, 237, 0.6);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--gold); }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .social-icon:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(197, 160, 89, 0.2);
+            margin: 32px 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 0;
+            font-size: 12px;
+            color: rgba(245, 242, 237, 0.5);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom a {
+            color: rgba(245, 242, 237, 0.6);
+            transition: color 0.3s;
+        }
+
+        .footer-bottom a:hover { color: var(--gold); }
+
+        /* WHATSAPP BUTTON */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #25d366, #20ba61);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s;
+            z-index: 900;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .blog-container { grid-template-columns: 1fr; }
+            .sidebar { position: sticky; top: 150px; max-height: fit-content; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .blog-container { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .fixed-top-bar { flex-direction: column; gap: 8px; }
+            .top-left, .top-right { width: 100%; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+    <!-- FIXED TOP BAR -->
+    <div class="fixed-top-bar">
+        <div class="top-left">
+            <div class="datetime" id="datetime">
+                <span id="dateTime">Loading...</span>
+            </div>
+        </div>
+        <div class="top-right">
+            <div class="contact-number">📞 +91-9876543210</div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="main.html" class="logo">
+                <img src="logo.png" alt="Smaya Developers">
+                <span>Smaya</span>
+            </a>
+            <div class="nav-links">
+                <a href="main.html#home">Home</a>
+                <a href="main.html#about">About</a>
+                <a href="main.html#services">Services</a>
+                <a href="project.html">Projects</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="main.html#contact">Contact</a>
+            </div>
+            <button class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
+        <a href="main.html#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="main.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="main.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="project.html" onclick="toggleMobileMenu()">Projects</a>
+        <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+        <a href="main.html#contact" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Blog & News</h1>
+            <p>Stay updated with the latest insights and tips about real estate investment</p>
+        </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="blog-section section">
+        <div class="container">
+            <div class="blog-container">
+                <div class="blog-posts">
+                    <!-- Blog Post 1 -->
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="img14.png" alt="Blog Post">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-date">📅 Mar 04, 2026</span>
+                                <span class="post-author">by Admin</span>
+                                <span class="post-category">Investment Tips</span>
+                            </div>
+                            <h2>Real Estate Investment Tips for 2026</h2>
+                            <p>In today's dynamic real estate market, making smart investment decisions is crucial. Whether you're a first-time buyer or an experienced investor, understanding current market trends can significantly impact your returns. We share expert insights on timing your investment, choosing the right location, and maximizing property appreciation in Mysore's booming real estate sector.</p>
+                            <a href="#" class="read-more-link">Continue Reading →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 2 -->
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="img15.png" alt="Blog Post">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-date">📅 Feb 28, 2026</span>
+                                <span class="post-author">by Admin</span>
+                                <span class="post-category">Market Analysis</span>
+                            </div>
+                            <h2>Why Mysore is the Best Investment Hub</h2>
+                            <p>Mysore has emerged as one of India's most sought-after investment destinations. The city offers perfect balance between cultural heritage and modern development, making it attractive to both residential and commercial investors. With strong infrastructure development, educational institutions, and growing IT sector, Mysore presents excellent long-term appreciation potential for savvy investors looking to diversify their portfolio.</p>
+                            <a href="#" class="read-more-link">Continue Reading →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 3 -->
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="img16.png" alt="Blog Post">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-date">📅 Feb 20, 2026</span>
+                                <span class="post-author">by Admin</span>
+                                <span class="post-category">Legal Guide</span>
+                            </div>
+                            <h2>RERA Registration: Everything You Need to Know</h2>
+                            <p>The Real Estate Regulatory Authority (RERA) was established to protect property buyers and ensure transparency in real estate transactions. Understanding RERA registration is essential before investing in any property. This comprehensive guide covers the benefits of RERA approval, how to verify property registration, red flags to watch for, and your rights as a buyer in RERA-registered projects.</p>
+                            <a href="#" class="read-more-link">Continue Reading →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 4 -->
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="img17.png" alt="Blog Post">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-date">📅 Feb 15, 2026</span>
+                                <span class="post-author">by Admin</span>
+                                <span class="post-category">Investment Tips</span>
+                            </div>
+                            <h2>Understanding A-Khata and B-Khata Properties</h2>
+                            <p>When buying property in India, understanding the difference between A-Khata and B-Khata is crucial. A-Khata properties are on surveyed land with proper documentation, while B-Khata properties are on unsurveyed land. We explain the advantages of A-Khata properties, the risks of B-Khata, legal implications, and why our developers exclusively deal with A-Khata properties to ensure buyer protection.</p>
+                            <a href="#" class="read-more-link">Continue Reading →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 5 -->
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="img18.png" alt="Blog Post">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-date">📅 Feb 10, 2026</span>
+                                <span class="post-author">by Admin</span>
+                                <span class="post-category">Market Analysis</span>
+                            </div>
+                            <h2>Property Value Appreciation in Mysore: Historical Trends</h2>
+                            <p>Analyzing historical property appreciation trends in Mysore reveals consistent growth over the past decade. Strategic locations have seen 40-50% appreciation in five years. We analyze which areas are expected to see maximum appreciation, factors influencing property values, and how to identify emerging hotspots for investment. Learn from data-driven insights to make informed investment decisions.</p>
+                            <a href="#" class="read-more-link">Continue Reading →</a>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 6 -->
+                    <article class="blog-post">
+                        <div class="blog-post-image">
+                            <img src="img19.png" alt="Blog Post">
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="post-meta">
+                                <span class="post-date">📅 Jan 28, 2026</span>
+                                <span class="post-author">by Admin</span>
+                                <span class="post-category">Buyer Guide</span>
+                            </div>
+                            <h2>First-Time Buyer's Guide: Steps to Purchasing Your First Property</h2>
+                            <p>Buying your first property is a major decision. Our comprehensive guide walks you through every step: identifying your budget, selecting the right location, document verification, legal checks, negotiation tactics, and closing procedures. We also highlight common mistakes first-time buyers make and how to avoid them. Start your property investment journey with confidence!</p>
+                            <a href="#" class="read-more-link">Continue Reading →</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- SIDEBAR -->
+                <aside class="sidebar">
+                    <!-- SEARCH BOX -->
+                    <div class="sidebar-box">
+                        <h3>Search Blog</h3>
+                        <div class="search-box">
+                            <input type="text" placeholder="Search articles...">
+                            <button>🔍</button>
+                        </div>
+                    </div>
+
+                    <!-- CATEGORIES -->
+                    <div class="sidebar-box">
+                        <h3>Categories</h3>
+                        <div class="category-list">
+                            <div class="category-item">
+                                <a href="#">Investment Tips</a>
+                                <span class="category-count">8</span>
+                            </div>
+                            <div class="category-item">
+                                <a href="#">Market Analysis</a>
+                                <span class="category-count">6</span>
+                            </div>
+                            <div class="category-item">
+                                <a href="#">Legal Guide</a>
+                                <span class="category-count">5</span>
+                            </div>
+                            <div class="category-item">
+                                <a href="#">Buyer Guide</a>
+                                <span class="category-count">4</span>
+                            </div>
+                            <div class="category-item">
+                                <a href="#">Property News</a>
+                                <span class="category-count">7</span>
+                            </div>
+                            <div class="category-item">
+                                <a href="#">Company Updates</a>
+                                <span class="category-count">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECENT POSTS -->
+                    <div class="sidebar-box">
+                        <h3>Recent Posts</h3>
+                        <div class="recent-posts-list">
+                            <div class="recent-post-item">
+                                <a href="#">Real Estate Investment Tips for 2026</a>
+                                <div class="recent-post-date">Mar 04, 2026</div>
+                            </div>
+                            <div class="recent-post-item">
+                                <a href="#">Why Mysore is the Best Investment Hub</a>
+                                <div class="recent-post-date">Feb 28, 2026</div>
+                            </div>
+                            <div class="recent-post-item">
+                                <a href="#">RERA Registration: Everything You Need to Know</a>
+                                <div class="recent-post-date">Feb 20, 2026</div>
+                            </div>
+                            <div class="recent-post-item">
+                                <a href="#">Understanding A-Khata and B-Khata Properties</a>
+                                <div class="recent-post-date">Feb 15, 2026</div>
+                            </div>
+                            <div class="recent-post-item">
+                                <a href="#">Property Value Appreciation in Mysore</a>
+                                <div class="recent-post-date">Feb 10, 2026</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA BOX -->
+                    <div class="sidebar-box" style="background: linear-gradient(135deg, var(--gold), var(--gold-light)); border: none;">
+                        <h3 style="color: var(--brown-dark); border-bottom-color: var(--brown-dark);">Ready to Invest?</h3>
+                        <p style="color: var(--brown-dark); margin-bottom: 16px; font-size: 13px;">Get expert consultation from our team about the best investment opportunities in Mysore.</p>
+                        <button class="btn btn-primary" style="width: 100%;">Contact Us Now</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4 style="color: var(--cream); text-transform: none; margin-bottom: 12px;">Smaya Developers</h4>
+                    <p>Premium residential plots in Mysore with world-class amenities and professional real estate solutions.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" title="Facebook">f</a>
+                        <a href="#" class="social-icon" title="Instagram">📷</a>
+                        <a href="#" class="social-icon" title="Twitter">𝕏</a>
+                        <a href="#" class="social-icon" title="LinkedIn">in</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="main.html#home">Home</a>
+                        <a href="main.html#about">About Us</a>
+                        <a href="main.html#services">Services</a>
+                        <a href="main.html#contact">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Information</h4>
+                    <div class="footer-links">
+                        <a href="blog.html">Blog</a>
+                        <a href="#">Careers</a>
+                        <a href="#">CSR</a>
+                        <a href="#">Partnership</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Disclaimer</a>
+                        <a href="#">RERA Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Smaya Developers. All rights reserved.</p>
+                <div>
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/919876543210?text=Hello%20Smaya%20Developers" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp">💬</a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // DATE AND TIME
+        function updateDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('dateTime').textContent = `📅 ${date} | 🕐 ${time}`;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // NAVBAR SCROLL EFFECT
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // MOBILE MENU
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
