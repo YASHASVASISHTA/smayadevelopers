@@ -354,16 +354,19 @@
             position: relative;
         }
 
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
-        }
+        /* Change this block */
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Changed from cover to contain */
+    background: #e3ddd3; /* Adds a subtle background to fill empty space */
+    transition: transform 0.4s;
+}
 
-        .project-card:hover .project-image img {
-            transform: scale(1.08);
-        }
+/* Optional: Disable the scale-up effect if it still feels like zooming */
+.project-card:hover .project-image img {
+    transform: scale(1.02); /* Reduced from 1.08 */
+}
 
         .project-status-badge {
             position: absolute;
@@ -511,11 +514,13 @@
             overflow: hidden;
         }
 
-        .modal-hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+      /* Change this block */
+.modal-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Changed from cover to contain */
+    background: #000; /* Black background often looks best for high-end project maps */
+}
 
         .modal-header {
             position: absolute;
@@ -613,11 +618,13 @@
             to { opacity: 1; }
         }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+       /* Change this block */
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Changed from cover to contain */
+    background: #f5f3f0; /* Matches your cream background */
+}
 
         .carousel-controls {
             position: absolute;

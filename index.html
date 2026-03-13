@@ -1139,19 +1139,52 @@
             <span class="welcome-text animate-left">Welcome to Smaya Developers</span>
             
             <div class="hero-content-main animate-right">
-                <div class="hero-badge">✨ Premium Properties in Mysore</div>
-                <h1>Premium <em>Plots for Sale</em> in Mysore</h1>
-                <p>Discover the finest residential plots in 3rd Stage Vijayanagar with world-class amenities, RERA approval, and A-Khata properties. Your dream home awaits!</p>
-                <div class="hero-buttons">
-                   <a href="plot.html" class="btn btn-primary">Book Plot Online</a>
-                    <button class="btn btn-outline" onclick="openContactModal()">Contact Us</button>
-                </div>
-            </div>
+    <div class="hero-badge">✨ Premium Properties in Mysore</div>
+    <h1>Premium <em>Plots for Sale</em> in <span id="rotating-location">Vijayanagar 3rd Stage</span></h1>
+    <p>Discover the finest residential plots in Mysore with world-class amenities and A-Khata properties. Your dream home awaits!</p>
+    <div class="hero-buttons">
+       <a href="plot.html" class="btn btn-primary">Book Plot Online</a>
+        <button class="btn btn-outline" onclick="openContactModal()">Contact Us</button>
+    </div>
+</div>
         </div>
     </div>
 </section>
+<style>#rotating-location {
+    display: inline-block;
+    min-width: 200px; /* Adjust this based on your longest location name */
+    transition: opacity 0.5s ease;
+    color: var(--gold); /* Keeps it consistent with your 'em' styling */
+}</style>
     <!-- BANNER CAROUSEL -->
-    
+   <script>// LOCATION TEXT ROTATOR
+const locations = [
+    "Vijayanagar 3rd Stage",
+    "Udbur",
+    "Devgalli"
+];
+
+let locationIndex = 0;
+const locationElement = document.getElementById('rotating-location');
+
+function rotateLocation() {
+    // 1. Start Fade Out
+    locationElement.style.opacity = '0';
+    locationElement.style.transition = 'opacity 0.5s ease';
+
+    setTimeout(() => {
+        // 2. Change the text after it fades out
+        locationIndex = (locationIndex + 1) % locations.length;
+        locationElement.textContent = locations[locationIndex];
+        
+        // 3. Fade back in
+        locationElement.style.opacity = '1';
+    }, 500); // This delay should match the transition time above
+}
+
+// Run the rotation every 2 seconds
+setInterval(rotateLocation, 2000);
+</script> 
 
  <section style="padding: 60px 0; background: var(--cream);">
         <div class="container">
@@ -1310,37 +1343,15 @@
             <p class="section-subtitle">Explore our completed and ongoing projects in Mysore</p>
         </div>
         
-        <a href="project.html" class="projects-container">
+        <div class="projects-container">
             <div src="project.html "class="project-item active">
                 <div class="project-img-wrapper">
                     <img src="img1.png" alt="Vijayanagar Heights">
                 </div>
                 <div class="project-details">
-                    <span class="project-status ongoing">Ongoing</span>
+                    <span class="project-status ongoing">Completed</span>
                     <h3>Vijayanagar Heights</h3>
                     <p>Premium plots in 3rd Stage Vijayanagar</p>
-                </div>
-            </div>
-
-            <div class="project-item">
-                <div class="project-img-wrapper">
-                    <img src="IMG1.png" alt="Green Valley Estate">
-                </div>
-                <div class="project-details">
-                    <span class="project-status completed">Completed</span>
-                    <h3>Green Valley Estate</h3>
-                    <p>Luxury eco-friendly plots</p>
-                </div>
-            </div>
-
-            <div class="project-item">
-                <div class="project-img-wrapper">
-                    <img src="IMG2.png" alt="Green Valley Estate">
-                </div>
-                <div class="project-details">
-                    <span class="project-status completed">Completed</span>
-                    <h3>Green Valley Estate</h3>
-                    <p>Luxury eco-friendly plots</p>
                 </div>
             </div>
 
@@ -1350,29 +1361,32 @@
                 </div>
                 <div class="project-details">
                     <span class="project-status completed">Completed</span>
-                    <h3>Green Valley Estate</h3>
+                    <h3>Udbur Valley Estate</h3>
                     <p>Luxury eco-friendly plots</p>
                 </div>
             </div>
 
             <div class="project-item">
                 <div class="project-img-wrapper">
-                    <img src="img1.jpeg" alt="Platinum Plaza">
+                    <img src="Gemini_Generated_Image_uss2xsuss2xsuss2.png" alt="Green Valley Estate">
                 </div>
                 <div class="project-details">
-                    <span class="project-status ongoing">Ongoing</span>
-                    <h3>Platinum Plaza</h3>
-                    <p>Commercial-residential hybrid</p>
+                    <span class="project-status completed">Ongoing</span>
+                    <h3>Devgalli Estate</h3>
+                    <p>Eco-friendly plots</p>
                 </div>
             </div>
-        </a>
+
+           
+
+         
+        </div>
 
         <div class="project-dots">
             <div class="dot active" onclick="goToProject(0)"></div>
             <div class="dot" onclick="goToProject(1)"></div>
             <div class="dot" onclick="goToProject(2)"></div>
-            <div class="dot" onclick="goToProject(3)"></div>
-            <div class="dot" onclick="goToProject(4)"></div>
+            
         </div>
     </div>
 </section>
@@ -1497,8 +1511,8 @@
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🏗️</div>
-                    <h3>Turnkey Projects</h3>
-                    <p>Smaya can facilitate project development and marketing for other parties. Contact us if you have properties to develop.</p>
+                    <h3>Construction Projects</h3>
+                    <p>Smaya offers end-to-end construction services, transforming vacant plots into high-quality residential and commercial spaces.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🤝</div>
@@ -1574,7 +1588,7 @@
                     <div class="testimonial-author">
                         <div class="author-avatar">RK</div>
                         <div class="author-info">
-                            <h4>Rajesh Kumar</h4>
+                            <h4>Manasa </h4>
                             <p>Plot Owner</p>
                         </div>
                     </div>
@@ -1585,9 +1599,8 @@
                     <div class="testimonial-author">
                         <div class="author-avatar">PS</div>
                         <div class="author-info">
-                            <h4>Priya Singh</h4>
-                            <p>Investor</p>
-                        </div>
+                            <h4>Sushmitha</h4>
+                            <p>Investor</p>                        </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
@@ -1596,7 +1609,7 @@
                     <div class="testimonial-author">
                         <div class="author-avatar">VM</div>
                         <div class="author-info">
-                            <h4>Vikram Malhotra</h4>
+                            <h4>Vikram </h4>
                             <p>Property Developer</p>
                         </div>
                     </div>
@@ -1623,12 +1636,9 @@
                 <div class="contact-info">
                     <div class="info-block">
                         <h4>📍 Mysore Office</h4>
-                        <p>3rd Stage Vijayanagar<br>Mysore - 570017<br>Karnataka, India</p>
+                        No.1-5 Nagarika Vedhika Building<br>Vishwamanava Double Road<br> Kuvempunagar Mysore - 570017<br>Karnataka, India</p>
                     </div>
-                    <div class="info-block">
-                        <h4>📍 Bangalore Office</h4>
-                        <p>Koramangala<br>Bangalore - 560034<br>Karnataka, India</p>
-                    </div>
+                  
                     <div class="info-block">
                         <h4>📞 Contact Information</h4>
                         <p>Phone: +91-9071756999<br>WhatsApp: +91-9071756999</p>
@@ -1910,4 +1920,3 @@ setInterval(() => {
     </script>
 </body>
 </html>
-
